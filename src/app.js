@@ -13,12 +13,11 @@ export function createApp() {
         console.log('Vue出现错误%s', err);
     }
     Vue.use(ElementUI);
-
-    if (process.browser) {
-        require ('swiper/dist/css/swiper.css')
-        const VueAwesomeSwiper = require('vue-awesome-swiper/ssr')
-        Vue.use(VueAwesomeSwiper)
-    }
+    // if (process.browser) {
+    //     require ('swiper/dist/css/swiper.css')
+    //     const VueAwesomeSwiper = require('vue-awesome-swiper/ssr')
+    //     Vue.use(VueAwesomeSwiper)
+    // }
     let router = createRouter();
     let app = new Vue({
         router,

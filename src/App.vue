@@ -12,15 +12,15 @@
 </script>
 <style>
     .fade-router-enter-active,.fade-router-leave-active{
-        transition: all .5s ease-in-out;
+        transition: all .2s linear;
     }
 
-    .fade-router-enter{
-        transform:translateX(100%);
-    }
-    .fade-router-leave{
-        transform:translateX(-100%);
-    }
+    /*.fade-router-enter{*/
+        /*transform:translateX(100%);*/
+    /*}*/
+    /*.fade-router-leave{*/
+        /*transform:translateX(-100%);*/
+    /*}*/
 
     .fade-router-enter,.fade-router-leave-active{
         opacity: 0;

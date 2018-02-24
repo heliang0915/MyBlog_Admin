@@ -1,7 +1,7 @@
 /**
  *   SEO和路由配置
  */
-import { indexComponent,aboutComponent,weightIndexComponent,notFoundComponent} from '../routes/asyncRoutes';
+import { indexComponent,indexEditComponent,channelListComponent,notFoundComponent} from '../routes/asyncRoutes';
 
 let seoMap={
     "/":{
@@ -11,6 +11,22 @@ let seoMap={
             description:"首页描述",
         },
         component:indexComponent
+    },
+    "/edit":{
+        seo:{
+            title:"编辑",
+            keywords:"编辑",
+            description:"编辑",
+        },
+        component:indexEditComponent
+    },
+    "/channel":{
+        seo:{
+            title:"频道列表",
+            keywords:"频道列表",
+            description:"频道列表",
+        },
+        component:channelListComponent
     },
     // "/about":{
     //     seo: {
