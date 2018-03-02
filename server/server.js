@@ -5,6 +5,7 @@ import  cookieParser from 'cookie-parser';
 import  bodyParser from 'body-parser';
 import {env,cacheTime} from '../config';
 import api from './router/api';
+import upload from './router/upload';
 import {useLog,fileLog} from './logs/logs';
 import index from './router/';
 import fs from 'fs';
@@ -25,6 +26,7 @@ App.use(bodyParser.json());
 App.use(bodyParser.urlencoded({extended:false}));
 App.use('/dist',express.static(path.join(__dirname,'/../dist/')));
 App.use('/assets',express.static(path.join(__dirname,'/../assets/')));
+App.use('/assets',express.static(path.join(__dirname,'/../server/public/')));
 
 App.use((req,res,next)=>{
     let date=new Date();
@@ -36,7 +38,9 @@ App.use((req,res,next)=>{
     next();
 })
 App.use("/api/",api)
+App.use("/upload",upload);
 App.use("/",index);
+
 // catch 404 and forward to error handler
 App.use(function(req, res, next) {
     var err = new Error('Not Found');

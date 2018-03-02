@@ -1,18 +1,17 @@
 /**
- * 频道查询API
+ * 文章查询API
  * User: heliang
  * Date: 2018/2/27.
  */
 import fetch from '../util/fetch';
 import {conf} from '../../config';
 
-let channelQuery={
+let articleQuery={
     //查询
     list:(cur)=>{
         cur=cur==null?1:cur;
-        console.log("ChannelQuery...");
         return new Promise((resolve,reject)=>{
-            fetch.get(`${conf.base}/api/channel/list?page=${cur}`).then((response)=>{
+            fetch.get(`${conf.base}/api/article/list?page=${cur}`).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{
@@ -22,7 +21,7 @@ let channelQuery={
     },
     getSingle:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            fetch.get(`${conf.base}/api/channel/single/${uuid}`).then((response)=>{
+            fetch.get(`${conf.base}/api/article/single/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{
@@ -31,9 +30,9 @@ let channelQuery={
         })
     },
     //保存
-    save:(channel)=>{
+    save:(article)=>{
         return new Promise((resolve,reject)=>{
-            fetch.post(`${conf.base}/api/channel/save`,channel).then((response)=>{
+            fetch.post(`${conf.base}/api/article/save`,article).then((response)=>{
                 let {data} =response;
                 resolve(data);
             }).catch((err)=>{
@@ -44,7 +43,7 @@ let channelQuery={
     del:(uuid)=>{
         return new Promise((resolve,reject)=>{
             console.log("del.....")
-            fetch.get(`${conf.base}/api/channel/delete/${uuid}`).then((response)=>{
+            fetch.get(`${conf.base}/api/article/delete/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{
@@ -54,4 +53,4 @@ let channelQuery={
     }
 }
 
-module.exports=channelQuery;
+module.exports=articleQuery;

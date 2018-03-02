@@ -6,17 +6,31 @@ let templateName="template";
 
 let config={
     development:{
-        port:4000,
+        port:9100,
         host:'http://localhost',
-        base:"http://localhost:4000",
-        api:'http://localhost:8888'
+        base:"http://localhost:9100",
+        api:'http://localhost:8888',
+        zimg:{
+            host:"p.3w.net579.com",
+            port:"80",
+            uploadPath:"/upload",
+            zImgUpload:"http://192.168.124.4/upload",
+            zImgDelete:"http://192.168.124.4/admin"
+        }
     },
     production:{
-        port:5000,
+        port:9200,
         host:'http://localhost',
-        base:"http://localhost:5000",
-        api:'http://localhost:8888'
-    }
+        base:"http://localhost:9200",
+        api:'http://localhost:8888',
+         zimg:{
+            host:"p.3w.net579.com",
+            port:"80",
+            uploadPath:"/upload",
+            zImgUpload:"http://192.168.124.4/upload",
+            zImgDelete:"http://192.168.124.4/admin"
+        }
+}
 };
 
 let conf= config[env];

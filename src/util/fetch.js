@@ -28,12 +28,12 @@ let Fetch = {
         return config = config == null ? {} : config;
     },
     get(url, config){
-        console.log(`Fetch GET URL => ${url}`);
-        return axios.get(url, this.parseConfig(config));
+        console.log(`Fetch GET URL => ${url}?temp=${Math.random()}`);
+        return axios.get(`${url}?temp=${Math.random()}`, this.parseConfig(config));
     },
     post(url, params, config){
-        console.log(`Fetch POST URL =>${url}`);
-        return axios.post(url, params, this.parseConfig(config));
+        console.log(`Fetch POST URL =>${url}?temp=${Math.random()} params:${params}`);
+        return axios.post(`${url}?temp=${Math.random()}`, params, this.parseConfig(config));
     }
 }
 

@@ -1,8 +1,7 @@
 /**
  *   SEO和路由配置
  */
-import { indexComponent,indexEditComponent,channelListComponent,notFoundComponent} from '../routes/asyncRoutes';
-
+import  component from '../routes/asyncRoutes';
 let seoMap={
     "/":{
         seo:{
@@ -10,7 +9,7 @@ let seoMap={
             keywords:"首页关键字",
             description:"首页描述",
         },
-        component:indexComponent
+        component:component.indexComponent
     },
     "/edit":{
         seo:{
@@ -18,7 +17,7 @@ let seoMap={
             keywords:"编辑",
             description:"编辑",
         },
-        component:indexEditComponent
+        component:component.indexEditComponent
     },
     "/channel":{
         seo:{
@@ -26,7 +25,31 @@ let seoMap={
             keywords:"频道列表",
             description:"频道列表",
         },
-        component:channelListComponent
+        component:component.channelListComponent
+    },
+    "/channel/save":{
+        seo:{
+            title:"频道编辑",
+            keywords:"频道编辑",
+            description:"频道编辑",
+        },
+        component:component.channelSaveComponent
+    },
+    "/article":{
+        seo:{
+            title:"文章列表",
+            keywords:"文章列表",
+            description:"文章列表",
+        },
+        component:component.articleListComponent
+    },
+    "/article/save":{
+        seo:{
+            title:"文章编辑",
+            keywords:"文章编辑",
+            description:"文章编辑",
+        },
+        component:component.articleSaveComponent
     },
     // "/about":{
     //     seo: {
@@ -50,7 +73,7 @@ let seoMap={
             keywords: "找不到了",
             description: "找不到了"
         },
-        component:notFoundComponent
+        component:component.notFoundComponent
     }
 }
 

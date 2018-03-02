@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-container>
+    <div >
+        <el-container >
             <!--头部-->
             <el-header>
                 <el-row>
@@ -43,13 +43,13 @@
                             </template>
                             <el-submenu index="1-1">
                                 <span slot="title">栏目管理</span>
-                                <el-menu-item index="1-1-1" @click="goto('/')">栏目列表</el-menu-item>
-                                <el-menu-item index="1-1-2" @click="goto('/edit')">小说标签列表</el-menu-item>
+                                <el-menu-item index="1-1-1" @click="goto('/channel')">栏目列表</el-menu-item>
+                                <el-menu-item index="1-1-2" @click="goto('/channel/save')">添加栏目</el-menu-item>
                             </el-submenu>
                             <el-submenu index="1-2">
                                 <span slot="title">文章管理</span>
-                                <el-menu-item index="1-2-1">文章列表</el-menu-item>
-                                <el-menu-item index="1-2-2">优质作品列表</el-menu-item>
+                                <el-menu-item index="1-2-1" @click="goto('/article')">文章列表</el-menu-item>
+                                <el-menu-item index="1-2-2" @click="goto('/article/save')">添加文章</el-menu-item>
                             </el-submenu>
                         </el-submenu>
                         <el-menu-item index="2">
@@ -66,7 +66,7 @@
                         </el-menu-item>
                     </el-menu>
                 </el-aside>
-                <el-main>
+                <el-main v-cloak>
                     <slot></slot>
                 </el-main>
             </el-container>
@@ -135,6 +135,7 @@
     }
 
     .el-main {
+        min-height: 590px;
         background-color: #f7f7f7;
         /*color: #333;*/
         /*text-align: center;*/
@@ -180,6 +181,15 @@
             ...mapActions(['fetchIndexList']),
             goto(url){
                 this.$router.push(url);
+            }
+        },
+        mounted(){
+            var winH=document.documentElement.clientHeight;
+            var headerH=parseFloat(window.getComputedStyle(document.getElementsByClassName("el-header")[0]).height);
+            var footerH=parseFloat(window.getComputedStyle(document.getElementsByClassName("el-footer")[0]).height);
+            var main=document.getElementsByClassName("el-main")[0];
+            if(window.location.href.indexOf("article/save")==-1){
+                main.style.height=(winH-headerH-footerH)+"px"
             }
         }
     }
