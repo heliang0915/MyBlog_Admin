@@ -14,8 +14,8 @@ let config={
             host:"p.3w.net579.com",
             port:"80",
             uploadPath:"/upload",
-            zImgUpload:"http://192.168.124.4/upload",
-            zImgDelete:"http://192.168.124.4/admin"
+            zImgUpload:"http://192.168.0.4/upload",
+            zImgDelete:"http://192.168.0.4/admin"
         }
     },
     production:{
@@ -27,8 +27,8 @@ let config={
             host:"p.3w.net579.com",
             port:"80",
             uploadPath:"/upload",
-            zImgUpload:"http://192.168.124.4/upload",
-            zImgDelete:"http://192.168.124.4/admin"
+            zImgUpload:"http://192.168.0.4/upload",
+            zImgDelete:"http://192.168.0.4/admin"
         }
 }
 };
