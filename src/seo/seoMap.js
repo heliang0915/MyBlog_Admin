@@ -43,7 +43,7 @@ let seoMap={
         },
         component:component.articleListComponent
     },
-    "/article/save":{
+    "/article/save*":{
         seo:{
             title:"文章编辑",
             keywords:"文章编辑",

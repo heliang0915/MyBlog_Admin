@@ -5,7 +5,7 @@ import  seoMap from '../../src/seo/seoMap';
 import minify from 'html-minifier';
 const {createBundleRenderer} = require('vue-server-renderer');
 const resolve = file => path.resolve(__dirname, file);
-import  {env} from '../../config';
+import  {env,editorConfig} from '../../config';
 let router=express.Router();
 let template = fs.readFileSync(path.join(__dirname,'../template/template.html'),'utf-8');
 const serverBundle = require('../../dist/vue-ssr-server-bundle.json');
@@ -49,7 +49,7 @@ router.route("*").all((req,res,next)=>{
         title: '默认标题',
         url:req.originalUrl
     }
-    // console.log(`req.originalUrl>>>>${req.originalUrl}`);
+
     context=mergeContext(context,req.originalUrl);
     const s = Date.now()
     renderer.renderToString(context, (err, html) => {

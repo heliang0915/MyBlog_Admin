@@ -5,7 +5,7 @@
  */
 import fetch from '../util/fetch';
 import {conf} from '../../config';
-
+import common from '../util/common';
 let articleQuery={
     //查询
     list:(cur)=>{

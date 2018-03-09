@@ -9,7 +9,7 @@
 
                     </el-form-item>
                     <el-form-item prop="content" label="内容">
-                        <el-input :autosize="{minRows:10}" type="textarea" v-model="info.article.content"></el-input>
+                        <el-input :id="'content'" :autosize="{minRows:10}" type="textarea" v-model="info.article.content"></el-input>
                     </el-form-item>
 
                     <el-form-item prop="tag" label="分类">
@@ -49,8 +49,6 @@
                     </el-form-item>
                     <el-input type="hidden" v-model="info.article.uuid"></el-input>
                 </el-form>
-                {{info.article.pic}}
-                {{info.article.pic}}
             </el-col>
         </el-row>
     </layout>
@@ -89,7 +87,8 @@
         computed:{
             ...mapGetters({
                 state:'getArticleSaveState',
-                info:'getArticleSingle'
+                info:'getArticleSingle',
+                editorCfg:'getEditor'
             })
 
         },
@@ -97,13 +96,52 @@
             var uuid=this.$route.query.uuid;
             uuid= uuid==null?0:uuid;
             this.fetchArticle(uuid);
-            // this.dialogVisible=this.info.pic==null?false:true
-
+            this.fetchEditorCfg();
+            this.initEditor();
         },
         methods:{
-            ...mapActions(['articleSave','fetchArticle','resetForm']),
+            ...mapActions(['articleSave','fetchArticle','resetForm','fetchEditorCfg']),
             onBack(){
                 this.$router.push("/article");
+            },
+            initEditor(){
+                // console.log("E>>>>>>>>"+E)
+                var self=this;
+
+                setTimeout(()=>{
+                    var editor = new wangEditor('content');
+                    editor.create();
+                    console.log(this.info.article.content);
+                    editor.$txt.html(this.info.article.content);
+                    editor.onchange = function () {
+                        // onchange 事件中更新数据
+                        self.info.article.content = editor.$txt.html();
+                    };
+                },1000)
+
+
+                // 或者 var editor = new E( document.getElementById('editor') )
+
+                // var editCfg=this.editorCfg;
+                // var config = {
+                //     // //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
+                //     toolbar:[
+                //         'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
+                //         'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
+                //         '| justifyleft justifycenter justifyright justifyjustify |',
+                //         'link unlink | image',
+                //         '| fullscreen', 'drafts'
+                //     ]
+                // };
+                // config=Object.assign({},config,editCfg);
+                // console.log(window.UM);
+                // setTimeout(()=>{
+                //     var um = window.UM.getEditor('content', config);
+                // },100)
+
+            },
+            getEditorCfg(){
+
             },
             handleAvatarSuccess(res, file){
                 if(res.flag){

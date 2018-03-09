@@ -1,5 +1,6 @@
 import * as types from '../mutaion-types';
 import articleQuery from '../../api/articleQuery';
+import editorQuery from '../../api/editorQuery';
 
 const state={
     articles:[],
@@ -16,7 +17,8 @@ const state={
     message:{
         flag:0,
         err:''
-    }
+    },
+    editorConfig:{}
 }
 
 const mutations={
@@ -56,6 +58,9 @@ const mutations={
             state.message.err=mes;
         }
     },
+    [types.EDITOR_CFG](state,payload){
+        state.editorConfig=payload;
+    }
 }
 
 const actions={
@@ -77,10 +82,15 @@ const actions={
         commit(types.RESET_ARTICLE)
     },
     fetchArticleDel:async ({commit},{uuid,fn})=>{
-        console.log("fetchArticleDel>>>>")
         let message=await  articleQuery.del(uuid);
         commit(types.DELETE_ARTICLE,message);
         fn==null?function () {}:fn();
+    },
+    fetchEditorCfg:async ({commit})=>{
+        console.log("fetchEditorCfg>>>>>>>>>>");
+        let editorCfg=await editorQuery.getEditorCfg();
+        console.log("editorCfg>>>>>"+editorCfg);
+        commit(types.EDITOR_CFG,editorCfg)
     }
 
 }
@@ -88,7 +98,8 @@ const getters={
     getArticleList:(state)=>state,
     getArticleSaveState:(state)=>state,
     getArticleSingle:(state)=>state,
-    getArticleDelMsg:(state)=>state.message
+    getArticleDelMsg:(state)=>state.message,
+    getEditor:(state)=>state.editorConfig
 }
 
 module.exports={

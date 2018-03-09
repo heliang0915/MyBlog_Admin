@@ -28,6 +28,8 @@ export const DELETE_CHANNEL="DELETE_CHANNEL";
 export const FETCH_ARTICLE_LIST="FETCH_ARTICLE_LIST";
 //保存
 export const ARTICLE_SAVE="ARTICLE_SAVE";
+//编辑器
+export const EDITOR_CFG="EDITOR_CFG";
 
 //获取文章信息
 export const FETCH_ARTICLE_SINGLE="FETCH_ARTICLE_SINGLE";

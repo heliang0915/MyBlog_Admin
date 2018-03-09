@@ -1,9 +1,7 @@
 <template>
     <div id="app">
         <transition name="fade-router" mode="in-out">
-            <!--<keep-alive>-->
-                <router-view></router-view>
-            <!--</keep-alive>-->
+            <router-view></router-view>
         </transition>
     </div>
 </template>
@@ -14,14 +12,12 @@
     .fade-router-enter-active,.fade-router-leave-active{
         transition: all .2s linear;
     }
-
     /*.fade-router-enter{*/
         /*transform:translateX(100%);*/
     /*}*/
     /*.fade-router-leave{*/
         /*transform:translateX(-100%);*/
     /*}*/
-
     .fade-router-enter,.fade-router-leave-active{
         opacity: 0;
     }

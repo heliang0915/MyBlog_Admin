@@ -34,8 +34,18 @@ let config={
 };
 
 let conf= config[env];
-let isServer=vueEnv=="server";
+var BaseURL = "/umeditor/";
+let editorConfig= {
+    //为编辑器实例添加一个路径，这个不能被注释
+    UMEDITOR_HOME_URL: BaseURL,
+    imageUrl: "/editor/uploadEditor",//图片上传提交地址
+    imagePath: "/upload/images/", //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
+    imageFieldName: "upfile",
+};
+
+
+let isServer=(vueEnv=="server");
 let isProd=(env!="development");
 module.exports={
-    conf,env,isProd,isServer,cacheTime,templateName
+    conf,env,isProd,isServer,cacheTime,templateName,editorConfig
 }
