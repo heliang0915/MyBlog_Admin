@@ -1,17 +1,16 @@
 /**
- * 文章查询API
+ * 用户查询API
  * User: heliang
  * Date: 2018/2/27.
  */
 import fetch from '../util/fetch';
 import {conf} from '../../config';
-import common from '../util/common';
-let articleQuery={
+let userQuery={
     //查询
     list:({cur,params})=>{
         cur=cur==null?1:cur;
         return new Promise((resolve,reject)=>{
-            fetch.post(`${conf.base}/api/article/list`,{
+            fetch.post(`${conf.base}/api/user/list`,{
                 page:cur,
                 params:params
             }).then((response)=>{
@@ -24,7 +23,17 @@ let articleQuery={
     },
     getSingle:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            fetch.get(`${conf.base}/api/article/single/${uuid}`).then((response)=>{
+            fetch.get(`${conf.base}/api/user/single/${uuid}`).then((response)=>{
+                let {data} =response;
+                resolve(data)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
+    },
+    getUserInfo:(uuid)=>{
+        return new Promise((resolve,reject)=>{
+            fetch.get(`${conf.base}/api/user/getUserInfo/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{
@@ -33,9 +42,9 @@ let articleQuery={
         })
     },
     //保存
-    save:(article)=>{
+    save:(user)=>{
         return new Promise((resolve,reject)=>{
-            fetch.post(`${conf.base}/api/article/save`,article).then((response)=>{
+            fetch.post(`${conf.base}/api/user/save`,user).then((response)=>{
                 let {data} =response;
                 resolve(data);
             }).catch((err)=>{
@@ -46,7 +55,7 @@ let articleQuery={
     del:(uuid)=>{
         return new Promise((resolve,reject)=>{
             console.log("del.....")
-            fetch.get(`${conf.base}/api/article/delete/${uuid}`).then((response)=>{
+            fetch.get(`${conf.base}/api/user/delete/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{
@@ -56,4 +65,4 @@ let articleQuery={
     }
 }
 
-module.exports=articleQuery;
+module.exports=userQuery;

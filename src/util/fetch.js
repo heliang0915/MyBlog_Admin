@@ -1,26 +1,32 @@
 import 'babel-polyfill';
 import  axios from 'axios';
-// import Vue from 'vue';
+import Vue from 'vue';
 //服务器端渲染会异常 没有document
-// require('nprogress/nprogress.css')
-// let NProgress = require('nprogress');
-// NProgress.configure({showSpinner: false});
+require('nprogress/nprogress.css')
+import {isServer} from '../../config'
+let NProgress = require('nprogress');
+NProgress.configure({showSpinner: false});
 //请求前拦截
-// axios.interceptors.request.use(function (config) {
-//     console.log('请求前...');
-//     // NProgress.start();
-//     return config;
-// }, function (error) {
-//     return Promise.reject(error);
-// })
+axios.interceptors.request.use(function (config) {
+    console.log('请求前...'+isServer);
+    if(!isServer){
+        NProgress.start();
+    }
+
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+})
 // //响应前拦截
-// axios.interceptors.response.use(function (response) {
-//     console.log('响应前...');
-//     // NProgress.done();
-//     return response;
-// }, function (error) {
-//     return Promise.reject(error)
-// })
+axios.interceptors.response.use(function (response) {
+    console.log('响应前...');
+    if(!isServer){
+        NProgress.done();
+    }
+    return response;
+}, function (error) {
+    return Promise.reject(error)
+})
 
 let Fetch = {
     baseURl: "/",
@@ -29,10 +35,12 @@ let Fetch = {
     },
     get(url, config){
         console.log(`Fetch GET URL => ${url}?temp=${Math.random()}`);
-        return axios.get(`${url}?temp=${Math.random()}`, this.parseConfig(config));
+        url=url.indexOf('?')>-1?`${url}&temp=${Math.random()}`:`${url}?temp=${Math.random()}`
+        return axios.get(`${url}`, this.parseConfig(config));
     },
     post(url, params, config){
-        console.log(`Fetch POST URL =>${url}?temp=${Math.random()} params:${params}`);
+        console.log(`Fetch POST URL =>${url}?temp=${Math.random()} params:${JSON.stringify(params)}`);
+        url=url.indexOf('?')>-1?`${url}&temp=${Math.random()}`:`${url}?temp=${Math.random()}`
         return axios.post(`${url}?temp=${Math.random()}`, params, this.parseConfig(config));
     }
 }

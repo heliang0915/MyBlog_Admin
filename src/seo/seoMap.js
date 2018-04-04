@@ -43,13 +43,69 @@ let seoMap={
         },
         component:component.articleListComponent
     },
-    "/article/save*":{
+    "/article/save":{
         seo:{
             title:"文章编辑",
             keywords:"文章编辑",
             description:"文章编辑",
         },
         component:component.articleSaveComponent
+    },
+    "/user":{
+        seo:{
+            title:"用户列表",
+            keywords:"用户列表",
+            description:"用户列表",
+        },
+        component:component.userListComponent
+    },
+    "/user/save":{
+        seo:{
+            title:"用户编辑",
+            keywords:"文章编辑",
+            description:"用户编辑",
+        },
+        component:component.userSaveComponent
+    },
+    "/role":{
+        seo:{
+            title:"角色列表",
+            keywords:"角色列表",
+            description:"角色列表",
+        },
+        component:component.roleListComponent
+    },
+    "/role/save":{
+        seo:{
+            title:"角色编辑",
+            keywords:"角色编辑",
+            description:"角色编辑",
+        },
+        component:component.roleSaveComponent
+    },
+    "/menu":{
+        seo:{
+            title:"菜单列表",
+            keywords:"菜单列表",
+            description:"菜单列表",
+        },
+        component:component.menuListComponent
+    },
+    "/menu/save":{
+        seo:{
+            title:"菜单编辑",
+            keywords:"菜单编辑",
+            description:"菜单编辑",
+        },
+        component:component.menuSaveComponent
+    },
+    "/right/:uuid":{
+        seo:{
+            title:"权限",
+            keywords:"权限",
+            description:"权限",
+        },
+        component:component.rightComponent
     },
     // "/about":{
     //     seo: {

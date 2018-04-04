@@ -5,6 +5,7 @@
             <el-header>
                 <el-row>
                     <el-col :span="4">
+                        <!--{{loginUser}}-->
                         <!--<img class="logo"  alt="">-->
                         <h3>MyBlog</h3>
                     </el-col>
@@ -14,7 +15,7 @@
                     <el-col :span="2">
                         <el-dropdown>
                             <!--<i class="el-icon-setting" style="margin-right: 15px"></i>-->
-                            <img class="user-photo" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519447010817&di=c8d1a6f79578825d7a891c957a705a5b&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201505%2F24%2F20150524232638_kEQGm.jpeg"></img>
+                            <img class="user-photo" :src="loginUser.pic"></img>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>
                                     <el-badge is-dot class="item">
@@ -29,41 +30,24 @@
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
-                        <span class="user">王小虎</span>
+                        <span class="user">{{loginUser.name}}</span>
                     </el-col>
                 </el-row>
             </el-header>
             <el-container>
                 <el-aside :width="hastable?'120px':'68px'" height="100%">
-                    <el-menu  default-active="1-1-1" class="el-menu-vertical-demo"  :collapse="true">
-                        <el-submenu index="1">
+                    <el-menu   class="el-menu-vertical-demo"  :collapse="true">
+                        <el-submenu :index="(index+1)+''" :key="'fMenu'+index" v-for="(fMenu,index) in menuStruct">
                             <template slot="title">
-                                <i class="el-icon-document"></i>
-                                <span slot="title">小说内容维护</span>
+                                <i :class="menuIcon[index]"></i>
+                                <span slot="title">{{fMenu.name}}</span>
                             </template>
-                            <el-submenu index="1-1">
-                                <span slot="title">栏目管理</span>
-                                <el-menu-item index="1-1-1" @click="goto('/channel')">栏目列表</el-menu-item>
-                                <el-menu-item index="1-1-2" @click="goto('/channel/save')">添加栏目</el-menu-item>
-                            </el-submenu>
-                            <el-submenu index="1-2">
-                                <span slot="title">文章管理</span>
-                                <el-menu-item index="1-2-1" @click="goto('/article')">文章列表</el-menu-item>
-                                <el-menu-item index="1-2-2" @click="goto('/article/save')">添加文章</el-menu-item>
+
+                            <el-submenu :key="'sMenu'+m" :index="(index+1)+'-'+(m+1)" v-for="(sMenu,m) in fMenu.children">
+                                <span slot="title">{{sMenu.name}}</span>
+                                <el-menu-item :index="(index+1)+'-'+(m+1)+'-'+(n+1)" :key="'tMenu'+n" v-for="(tMenu,n) in sMenu.children" @click="goto(tMenu.url)">{{tMenu.name}}</el-menu-item>
                             </el-submenu>
                         </el-submenu>
-                        <el-menu-item index="2">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">导航二</span>
-                        </el-menu-item>
-                        <el-menu-item index="3">
-                            <i class="el-icon-document"></i>
-                            <span slot="title">导航三</span>
-                        </el-menu-item>
-                        <el-menu-item index="4">
-                            <i class="el-icon-setting"></i>
-                            <span slot="title">导航四</span>
-                        </el-menu-item>
                     </el-menu>
                 </el-aside>
                 <el-main v-cloak>
@@ -71,7 +55,7 @@
                 </el-main>
             </el-container>
             <el-footer height="40">
-                xxxx版权所有
+                博客之家版权所有
             </el-footer>
         </el-container>
     </div>
@@ -156,6 +140,7 @@
 </style>
 <script>
     import {mapActions,mapGetters} from 'vuex';
+
     export default{
         props:{
           hastable:{
@@ -163,22 +148,24 @@
               default:false
           }
         },
+        data(){
+          return{
+              menuIcon:["el-icon-document","el-icon-menu","el-icon-view","el-icon-setting"]
+          }
+        },
         computed:{
             ...mapGetters({
-                indexState:'getIndexList'
+                menuStruct:'getMenus',
+                loginUser:'getUserInfo'
             })
         },
         //给服务器端使用的方法
         asyncData(store){
             console.log('asyncData...');
-            store.dispatch('fetchIndexList')
-        },
-        mounted(){
-            console.log('mounted....');
-            this.fetchIndexList();
+            // store.dispatch('fetchIndexList')
         },
         methods:{
-            ...mapActions(['fetchIndexList']),
+            ...mapActions(['fetchMenus','fetchUserInfo']),
             goto(url){
                 this.$router.push(url);
             }
@@ -191,6 +178,8 @@
             if(window.location.href.indexOf("article/save")==-1){
                 main.style.height=(winH-headerH-footerH)+"px"
             }
+            this.fetchMenus(-1);
+            this.fetchUserInfo('1ef4da32d14342f7b9061e8f5c0a5025');
         }
     }
 </script>

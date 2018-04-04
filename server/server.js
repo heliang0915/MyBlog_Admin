@@ -1,16 +1,16 @@
 import express from 'express';
 import  path from 'path';
-// import debug from 'morgan';
 import  cookieParser from 'cookie-parser';
 import  bodyParser from 'body-parser';
 import {env,cacheTime} from '../config';
 import api from './router/api';
 import upload from './router/upload';
+import auth from './router/auth';
 import {useLog,fileLog} from './logs/logs';
 import index from './router/';
 import fs from 'fs';
+import  session from 'express-session';
 import compression from 'compression';
-
 let App=express();
 
 //日志配置
@@ -21,12 +21,24 @@ App.use(compression({
     threshold:0
 }));
 // App.use(debug('dev'));
+//启用session
+App.use(session({
+////这里的name值得是cookie的name，默认cookie的name是：connect.sid
+//     name: 'blog',
+    secret: 'keyboard cat',
+    // cookie: ('name', 'value', { path: '/', httpOnly: true,secure: false, maxAge:  60000 }),
+    //重新保存：强制会话保存即使是未修改的。默认为true但是得写上
+    resave: true,
+    //强制“未初始化”的会话保存到存储。
+    saveUninitialized: true,
+
+}))
+
 App.use(cookieParser());
 App.use(bodyParser.json());
 App.use(bodyParser.urlencoded({extended:false}));
 App.use('/dist',express.static(path.join(__dirname,'/../dist/')));
 App.use('/assets',express.static(path.join(__dirname,'/../assets/')));
-App.use('/assets',express.static(path.join(__dirname,'/../server/public/')));
 
 App.use((req,res,next)=>{
     let date=new Date();
@@ -37,8 +49,21 @@ App.use((req,res,next)=>{
     res.header("Expires",date.toUTCString());
     next();
 })
+App.use('/assets',express.static(path.join(__dirname,'/../server/public/')));
+
+App.use((req,res,next)=>{
+
+    console.log("sessionID:"+req.sessionID);
+    console.log("req.session.cookie :"+req.blog );
+    // sessionHelper.getAttr();
+
+    next();
+});
 App.use("/api/",api)
 App.use("/upload",upload);
+App.use("/auth",auth);
+
+
 App.use("/",index);
 
 // catch 404 and forward to error handler

@@ -9,13 +9,14 @@ let config={
         port:9100,
         host:'http://localhost',
         base:"http://localhost:9100",
+        // api:'https://apiblog.butterfly.mopaasapp.com',
         api:'http://localhost:8888',
         zimg:{
             host:"p.3w.net579.com",
             port:"80",
             uploadPath:"/upload",
-            zImgUpload:"http://192.168.0.4/upload",
-            zImgDelete:"http://192.168.0.4/admin"
+            zImgUpload:"http://192.168.124.4/upload",
+            zImgDelete:"http://192.168.124.4/admin"
         }
     },
     production:{
@@ -24,11 +25,11 @@ let config={
         base:"http://localhost:9200",
         api:'http://localhost:8888',
          zimg:{
-            host:"p.3w.net579.com",
+            host:"192.168.124.4",
             port:"80",
             uploadPath:"/upload",
-            zImgUpload:"http://192.168.0.4/upload",
-            zImgDelete:"http://192.168.0.4/admin"
+            zImgUpload:"http://192.168.124.4/upload",
+            zImgDelete:"http://192.168.124.4/admin"
         }
 }
 };

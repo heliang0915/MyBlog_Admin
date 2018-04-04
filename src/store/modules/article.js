@@ -27,6 +27,7 @@ const mutations={
         state.articles=payload.models;
         state.total=payload.total;
         state.pageSize=payload.pageSize;
+        state.innerChannels=payload.channels;
     },
     [types.ARTICLE_SAVE](state,payload){
         let mes=payload;
@@ -64,8 +65,8 @@ const mutations={
 }
 
 const actions={
-    fetchArticleList:async ({commit},cur)=>{
-        var pageInfo= await  articleQuery.list(cur);
+    fetchArticleList:async ({commit},{cur,params})=>{
+        var pageInfo= await  articleQuery.list({cur,params});
         commit(types.FETCH_ARTICLE_LIST,pageInfo)
     },
     articleSave:async ({commit},{article,fn})=>{

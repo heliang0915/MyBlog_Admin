@@ -142,3 +142,16 @@ ul {
   display: none;
 }
 /**/
+
+#nprogress .bar {
+  background: #FFF !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #FFF, 0 0 5px #FFF !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #FFF !important;
+  border-left-color: #FFF !important;
+}

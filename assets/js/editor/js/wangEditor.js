@@ -25,8 +25,6 @@
         // 全局模式
         factory(window.jQuery);
     }
-    // 全局模式
-    // factory(window.jQuery);
 })(function($){
     
     // 验证是否引用jquery

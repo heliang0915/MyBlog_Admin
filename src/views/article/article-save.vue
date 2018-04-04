@@ -9,7 +9,7 @@
 
                     </el-form-item>
                     <el-form-item prop="content" label="内容">
-                        <el-input :id="'content'" :autosize="{minRows:10}" type="textarea" v-model="info.article.content"></el-input>
+                        <el-input prop="content" :id="'content'" :autosize="{minRows:10,maxRows:30}" type="textarea" v-model="info.article.content"></el-input>
                     </el-form-item>
 
                     <el-form-item prop="tag" label="分类">
@@ -43,6 +43,12 @@
                         </el-dialog>
                         上次使用：<img v-if="info.article.pic!=null" style="width: 150px;height: 150px;border-radius: 10px;" :src="info.article.pic" alt="">
                     </el-form-item>
+
+
+                    <el-form-item prop="title" label="发布人" >
+                        <el-input v-model="info.article.pubUser"></el-input>
+                    </el-form-item>
+
                     <el-form-item>
                         <el-button type="primary" @click="onSave">保存</el-button>
                         <el-button @click="onBack">返回</el-button>
@@ -93,7 +99,8 @@
 
         },
         mounted(){
-            var uuid=this.$route.query.uuid;
+            // var temp=this.$route.params.uuid;
+            var uuid=this.$route.query.uuid;//temp.substring(0,temp.indexOf('?'));
             uuid= uuid==null?0:uuid;
             this.fetchArticle(uuid);
             this.fetchEditorCfg();
@@ -104,44 +111,61 @@
             onBack(){
                 this.$router.push("/article");
             },
-            initEditor(){
-                // console.log("E>>>>>>>>"+E)
-                var self=this;
+            initUpload(editor){
+                editor.config.uploadImgUrl="/upload/uploadFileByEditor";
+                editor.config.hideLinkImg = true;
+                editor.config.uploadImgFileName="upload"
 
+            },
+            initEditor(){
+                var self=this;
+                var total=50;
+
+                var smiles=[];
+                for(var i=0;i<total;i++){
+                    var json= {
+                        icon:'http://www.jq22.com/demo/qqFace/arclist/'+(i+1)+'.gif',
+                        value:'[em_'+(i+1)+']'
+                    }
+                    smiles.push(json);
+
+                }
                 setTimeout(()=>{
                     var editor = new wangEditor('content');
+                    this.initUpload(editor);
+                    editor.config.menus = ['source','|','bold','underline','italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|', 'quote', 'fontfamily', 'fontsize',
+                        'head',
+                        'unorderlist',
+                        'orderlist',
+                        'alignleft',
+                        'aligncenter',
+                        'alignright',
+                        '|',
+                        'link',
+                        'unlink',
+                        'table',
+                        'emotion',
+                        '|',
+                        'img',
+                        'insertcode',
+                        'undo',
+                        'redo'
+                    ];
+
+                    editor.config.emotions = {
+                        'default': {
+                            title: '表情',  // 组名称
+                            data: smiles
+                        }
+                    }
+                    // editor.config.emotionsShow = 'value';
                     editor.create();
-                    console.log(this.info.article.content);
                     editor.$txt.html(this.info.article.content);
                     editor.onchange = function () {
                         // onchange 事件中更新数据
                         self.info.article.content = editor.$txt.html();
                     };
-                },1000)
-
-
-                // 或者 var editor = new E( document.getElementById('editor') )
-
-                // var editCfg=this.editorCfg;
-                // var config = {
-                //     // //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
-                //     toolbar:[
-                //         'source | undo redo | bold italic underline strikethrough | superscript subscript | forecolor backcolor | removeformat |',
-                //         'insertorderedlist insertunorderedlist | selectall cleardoc paragraph | fontfamily fontsize' ,
-                //         '| justifyleft justifycenter justifyright justifyjustify |',
-                //         'link unlink | image',
-                //         '| fullscreen', 'drafts'
-                //     ]
-                // };
-                // config=Object.assign({},config,editCfg);
-                // console.log(window.UM);
-                // setTimeout(()=>{
-                //     var um = window.UM.getEditor('content', config);
-                // },100)
-
-            },
-            getEditorCfg(){
-
+                },200)
             },
             handleAvatarSuccess(res, file){
                 if(res.flag){
@@ -159,6 +183,7 @@
             onSave(){
                 let {message}=this.state;
                 console.log(this.info);
+
                 let {article}=this.info;
                 this.$refs['form'].validate((valid)=>{
                     if(valid){

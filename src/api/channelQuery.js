@@ -12,7 +12,9 @@ let channelQuery={
         cur=cur==null?1:cur;
         console.log("ChannelQuery...");
         return new Promise((resolve,reject)=>{
-            fetch.get(`${conf.base}/api/channel/list?page=${cur}`).then((response)=>{
+            fetch.post(`${conf.base}/api/channel/list`,{
+                page:cur
+            }).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{

@@ -5,27 +5,16 @@
             <el-col>
                 <el-breadcrumb separator-class="el-icon-arrow-right">
                     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>文章管理</el-breadcrumb-item>
-                    <el-breadcrumb-item>文章列表</el-breadcrumb-item>
+                    <el-breadcrumb-item>角色管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>角色列表</el-breadcrumb-item>
                 </el-breadcrumb>
             </el-col>
         </el-row>
         <el-row>
             <el-col>
                 <el-form :inline="true" :model="key" class="demo-form-inline">
-                    <el-form-item label="文章名称">
-                        <el-input v-model="key.title" placeholder="文章名称"></el-input>
-
-                    </el-form-item>
-                    <el-form-item label="分类">
-                        <el-select v-model="key.tag" placeholder="分类">
-                            <el-option
-                                    v-for="item in articleState.innerChannels"
-                                    :key="item.name"
-                                    :label="item.name"
-                                    :value="item.uuid">
-                            </el-option>
-                        </el-select>
+                    <el-form-item label="角色名称">
+                        <el-input  v-model="key.name" placeholder="角色名称"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="search">查询</el-button>
@@ -33,29 +22,25 @@
                 </el-form>
             </el-col>
             <el-col>
-                <el-table  :data="articleState.articles" @selection-change="selectHandler" >
+                <el-table  :data="roleState.roles" @selection-change="selectHandler" >
                     <!--<el-table-column type="selection" width="55" ></el-table-column>-->
                     <!--<el-table-column prop="uuid" label="uuid" width="300"></el-table-column>-->
-                    <el-table-column prop="title" label="文章名称" ></el-table-column>
-                    <el-table-column prop="content" label="文章内容" width="500"></el-table-column>
-                    <el-table-column prop="channelName" label="分类"></el-table-column>
-                    <el-table-column prop="date" label="发布日期"></el-table-column>
-                    <el-table-column prop="pubUser" label="发布人"></el-table-column>
-                    <!--<el-table-column prop="order" label="排序号"></el-table-column>-->
-                    <el-table-column label="操作" width="200" @row-click="operation">
+                    <el-table-column prop="name" label="角色名称" ></el-table-column>
+                    <el-table-column prop="order" label="排序号"></el-table-column>
+                    <el-table-column label="操作" width="360" @row-click="operation">
                         <template slot-scope="scope">
                             <el-button type="success" @click="operation(scope.row)" round size="mini" icon="el-icon-edit">编辑</el-button>
-                            <el-button type="danger"  @click="deleteArticle(scope.row)" round size="mini" icon="el-icon-delete">删除</el-button>
-                            <!--<el-button type="primary" @click="oepnMsg('info','查看')" round size="mini" icon="el-icon-search">查看</el-button>-->
+                            <el-button type="danger"  @click="deleteRole(scope.row)" round size="mini" icon="el-icon-delete">删除</el-button>
+                            <el-button type="primary" @click="setRight(scope.row)" round size="mini" icon="el-icon-setting">设置权限</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
                 <el-pagination
-                        v-if="articleState.total>articleState.pageSize"
+                        v-if="roleState.total>roleState.pageSize"
                         background
                         layout="prev, pager, next"
-                        :pageSize=articleState.pageSize
-                        :total="articleState.total" @current-change="getSize">
+                        :pageSize=roleState.pageSize
+                        :total="roleState.total" @current-change="getSize">
                 </el-pagination>
             </el-col>
         </el-row>
@@ -65,12 +50,12 @@
 <script>
     import {mapActions,mapGetters} from 'vuex';
     import layout from '../layout'
-    export default{
+    export default {
         data() {
             return {
                 date:'',
                 key:{
-                    title:'',
+                    name:'',
                     tag:''
                 },
                 selected:[]
@@ -78,8 +63,8 @@
         },
         computed:{
             ...mapGetters({
-                articleState:'getArticleList',
-                delMsg:'getArticleDelMsg'
+                roleState:'getRoleList',
+                delMsg:'getRoleDelMsg'
             })
         },
         components:{
@@ -89,25 +74,31 @@
         asyncData(store){
             console.dir("asyncData..."+store.store);
             store=store.store?store.store:store;
-            // store.dispatch('fetchArticleList',{cur:1,params:{title:this.key.title}})
+            // store.dispatch('fetchRoleList')
         },
         mounted(){
             let {title,tag}=this.key;
-            this.fetchArticleList({cur:1,params:{title,tag}});
+            this.fetchRoleList({cur:1,params:{title,tag}});
+            // this.fetchRoleList();
         },
         methods:{
-            ...mapActions(['fetchArticleList','fetchArticleDel']),
+            ...mapActions(['fetchRoleList','fetchRoleDel']),
             getSize(size){
                 let {title,tag}=this.key;
-                this.fetchArticleList({cur:size,params:{title,tag}});
+                this.fetchRoleList({cur:size,params:{title,tag}});
+                // this.fetchRoleList(size);
             },
             operation(row){
                 var id=row.uuid;
-                this.$router.push("/article/save?uuid="+id);
+                this.$router.push("/role/save?uuid="+id+"?temp="+Math.random());
             },
-            deleteArticle(row){
+            setRight(row){
                 var id=row.uuid;
-                this.fetchArticleDel({uuid:id,fn:()=>{
+                this.$router.push("/right/"+id);
+            },
+            deleteRole(row){
+                var id=row.uuid;
+                this.fetchRoleDel({uuid:id,fn:()=>{
                         let msg="删除成功";
                         let {flag,err}=this.delMsg;
                         if(flag!=1){
@@ -118,7 +109,7 @@
                             type:(flag!=1)?'error':'success'
                         })
                         let {title,tag}=this.key;
-                        this.fetchArticleList({cur:1,params:{title,tag}});
+                        this.fetchRoleList({cur:1,params:{title,tag}});
                     }});
             },
             selectHandler(val){
@@ -132,8 +123,8 @@
                 });
             },
             search(){
-                let {title,tag}=this.key;
-                this.fetchArticleList({cur:1,params:{title,tag}});
+                let {name,tag}=this.key;
+                this.fetchRoleList({cur:1,params:{name,tag}});
             }
         }
     }

@@ -15,6 +15,15 @@ let {host,port}=zimgConf;
 
 //上传文件
 router.post("/uploadFile", function (req, res) {
+    upload(req,res);
+});
+
+router.post("/uploadFileByEditor", function (req, res) {
+    upload(req,res,"editor");
+});
+
+//上传动作
+function upload(req,res,type) {
     console.log("上传文件....");
     //生成multiparty对象，并配置上传目标路径
     var uploadPath=path.join(__dirname,"/../public/upload/")
@@ -41,31 +50,29 @@ router.post("/uploadFile", function (req, res) {
                     console.log("重命名完毕....");
                     zimg.upload(dstPath,inputFile,'userfile',(err,md5)=>{
                         fs.unlink(dstPath);
-                            let info={
-                                message:err==null?"ok":err.message,
-                                flag:err==null?1:0,
-                                data:{
-                                    md5:md5.replace('/',''),
-                                    url:"http://"+host+":"+port+md5
-                                }
-                            };
-                            res.send(info);
+                        let info={
+                            message:err==null?"ok":err.message,
+                            flag:err==null?1:0,
+                            data:{
+                                md5:md5.replace('/',''),
+                                url:"http://"+host+":"+port+md5
+                            }
+                        };
+                         if(type){
+                             res.send("http://"+host+":"+port+md5);
+                         }else{
+                             res.send(info);
+                         }
+
                     })
                 }
             });
         }
 
     });
-});
-
-//存入图片信息
-function addImgModel(md5,name,callback){
-    var modelData ={
-        name,
-        md5,
-    };
-    imgDao.add(modelData,()=>{
-        callback!=null?callback():null;
-    })
 }
+
+
+
+
 module.exports = router;

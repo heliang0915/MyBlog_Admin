@@ -3,8 +3,8 @@
  */
 import{createApp}from './app';
 import '../assets/js/lib/jquery.min.js';
-import '../assets/js/editor/js/wangEditor.js';
-import '../assets/js/editor/css/wangEditor.css';
+import '../assets/js/editor/js/wangEditor.min.js';
+import '../assets/js/editor/css/wangEditor.min.css';
 
 let {app,store,router}=createApp();
 if (window.__INITIAL_STATE__) {

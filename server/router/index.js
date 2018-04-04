@@ -24,7 +24,12 @@ let renderer=createBundleRenderer(serverBundle,{
 });
 //合并上下文
 let mergeContext=(context,path)=>{
-    let seoItem=seoMap[path];
+    var tmp=path;
+    // if(path.indexOf(".html")>-1){
+    //     tmp=path.substr(0,path.lastIndexOf("/"))+"/:uuid.html";
+    // }
+    console.log("tmp>>>>>>"+tmp);
+    let seoItem=seoMap[tmp];
     if(seoItem){
         let {seo}=seoItem;
         if(seo){
