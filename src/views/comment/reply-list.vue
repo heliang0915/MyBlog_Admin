@@ -5,16 +5,16 @@
             <el-col>
                 <el-breadcrumb separator-class="el-icon-arrow-right">
                     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-                    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-                    <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+                    <el-breadcrumb-item>回复管理</el-breadcrumb-item>
+                    <el-breadcrumb-item>回复列表</el-breadcrumb-item>
                 </el-breadcrumb>
             </el-col>
         </el-row>
         <el-row>
             <el-col>
                 <el-form :inline="true" :model="key" class="demo-form-inline">
-                    <el-form-item label="用户名称">
-                        <el-input  v-model="key.name" placeholder="用户名称"></el-input>
+                    <el-form-item label="回复内容">
+                        <el-input  v-model="key.name" placeholder="回复内容"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="search">查询</el-button>
@@ -22,43 +22,29 @@
                 </el-form>
             </el-col>
             <el-col>
-                <el-table  :data="userState.users" @selection-change="selectHandler" >
+                <!--{{commentState}}-->
+                <el-table  :data="commentState.comments" @selection-change="selectHandler" >
                     <!--<el-table-column type="selection" width="55" ></el-table-column>-->
                     <!--<el-table-column prop="uuid" label="uuid" width="300"></el-table-column>-->
-                    <el-table-column prop="name" label="用户名称" >
-                        <template slot-scope="scope">
-                            <div>{{scope.row.name==null?scope.row.nickName:scope.row.name}}</div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="phone" label="手机号">
-                        <template slot-scope="scope">
-                            <div v-if="scope.row.phone==null">无</div>
-                            <div v-else>{{scope.row.phone}}</div>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="loginType" label="登录方式">
-                        <template slot-scope="scope">
-                            <div v-if="scope.row.loginType==0">系统登录</div>
-                            <div v-if="scope.row.loginType==1">微信登录</div>
-                            <div v-if="scope.row.loginType==2">qq登录</div>
-                        </template>
-
-                    </el-table-column>
+                    <el-table-column prop="blogName" label="文章标题" ></el-table-column>
+                    <el-table-column prop="userName" label="回复用户" ></el-table-column>
+                    <el-table-column prop="content" label="回复内容"></el-table-column>
+                    <el-table-column prop="date" label="回复时间"></el-table-column>
                     <el-table-column prop="order" label="排序号"></el-table-column>
                     <el-table-column label="操作" width="200" @row-click="operation">
                         <template slot-scope="scope">
-                            <el-button type="success" @click="operation(scope.row)" round size="mini" icon="el-icon-edit">编辑</el-button>
-                            <el-button type="danger"  @click="deleteUser(scope.row)" round size="mini" icon="el-icon-delete">删除</el-button>
+                            <!--<el-button type="success" @click="operation(scope.row)" round size="mini" icon="el-icon-edit">编辑</el-button>-->
+                            <el-button type="danger"  @click="deleteComment(scope.row)" round size="mini" icon="el-icon-delete">删除</el-button>
                             <!--<el-button type="primary" @click="oepnMsg('info','查看')" round size="mini" icon="el-icon-search">查看</el-button>-->
                         </template>
                     </el-table-column>
                 </el-table>
                 <el-pagination
-                        v-if="userState.total>userState.pageSize"
+                        v-if="commentState.total>commentState.pageSize"
                         background
                         layout="prev, pager, next"
-                        :pageSize=userState.pageSize
-                        :total="userState.total" @current-change="getSize">
+                        :pageSize=commentState.pageSize
+                        :total="commentState.total" @current-change="getSize">
                 </el-pagination>
             </el-col>
         </el-row>
@@ -81,8 +67,8 @@
         },
         computed:{
             ...mapGetters({
-                userState:'getUserList',
-                delMsg:'getUserDelMsg'
+                commentState:'getCommentList',
+                delMsg:'getCommentDelMsg'
             })
         },
         components:{
@@ -92,27 +78,27 @@
         asyncData(store){
             console.dir("asyncData..."+store.store);
             store=store.store?store.store:store;
-            // store.dispatch('fetchUserList')
+            // store.dispatch('fetchCommentList')
         },
         mounted(){
             let {name,tag}=this.key;
-            this.fetchUserList({cur:1,params:{name,tag}});
-            // this.fetchUserList();
+            this.fetchCommentList({cur:1,params:{name,tag,type:2}});
+            // this.fetchCommentList();
         },
         methods:{
-            ...mapActions(['fetchUserList','fetchUserDel']),
+            ...mapActions(['fetchCommentList','fetchCommentDel']),
             getSize(size){
                 let {name,tag}=this.key;
-                this.fetchUserList({cur:size,params:{name,tag}});
-                // this.fetchUserList(size);
+                this.fetchCommentList({cur:size,params:{name,tag,type:2}});
+                // this.fetchCommentList(size);
             },
             operation(row){
                 var id=row.uuid;
-                this.$router.push("/user/save?uuid="+id+"?temp="+Math.random());
+                this.$router.push("/comment/save?uuid="+id+"?temp="+Math.random());
             },
-            deleteUser(row){
+            deleteComment(row){
                 var id=row.uuid;
-                this.fetchUserDel({uuid:id,fn:()=>{
+                this.fetchCommentDel({uuid:id,fn:()=>{
                         let msg="删除成功";
                         let {flag,err}=this.delMsg;
                         if(flag!=1){
@@ -123,7 +109,7 @@
                             type:(flag!=1)?'error':'success'
                         })
                         let {name,tag}=this.key;
-                        this.fetchUserList({cur:1,params:{name,tag}});
+                        this.fetchCommentList({cur:1,params:{name,tag,type:2}});
                     }});
             },
             selectHandler(val){
@@ -138,7 +124,7 @@
             },
             search(){
                 let {name,tag}=this.key;
-                this.fetchUserList({cur:1,params:{name,tag}});
+                this.fetchCommentList({cur:1,params:{name,tag,type:2}});
             }
         }
     }

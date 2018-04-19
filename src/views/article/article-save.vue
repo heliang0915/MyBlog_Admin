@@ -8,8 +8,10 @@
                         <el-input v-model="info.article.title"></el-input>
 
                     </el-form-item>
+                    <!--{{info.article.content}}-->
                     <el-form-item prop="content" label="内容">
                         <el-input prop="content" :id="'content'" :autosize="{minRows:10,maxRows:30}" type="textarea" v-model="info.article.content"></el-input>
+                        <!--<el-input prop="content" id="" cols="30" rows="10" v-model="info.article.content" type="textarea" ></el-input>-->
                     </el-form-item>
 
                     <el-form-item prop="tag" label="分类">
@@ -74,9 +76,11 @@
     import layout from '../layout';
     import {mapActions,mapGetters} from 'vuex';
     let temp={name:'',note:'',uuid:''};
+    var editor =null;
     export default {
         data(){
             return {
+                load:false,
                 fileList:[],
                 imageUrl:'',
                 dialogVisible:false,
@@ -89,6 +93,24 @@
                     ]
                 }
             }
+        },
+        watch:{
+            info:{
+                handler:function(val,oldval){
+                    let {load}=this;
+                    if(val.article.content&&load==false){
+                        editor.$txt.html(val.article.content);
+                        this.load=true;
+                        console.log("执行加载动作....");
+                    }
+
+                },
+                deep:true//对象内部的属性监听，也叫深度监听
+            }
+            // ,
+            // info:function (newVal) {
+            //     console.log(newVal);
+            // }
         },
         computed:{
             ...mapGetters({
@@ -131,7 +153,7 @@
 
                 }
                 setTimeout(()=>{
-                    var editor = new wangEditor('content');
+                    editor = new wangEditor('content');
                     this.initUpload(editor);
                     editor.config.menus = ['source','|','bold','underline','italic', 'strikethrough', 'eraser', 'forecolor', 'bgcolor', '|', 'quote', 'fontfamily', 'fontsize',
                         'head',
@@ -160,7 +182,7 @@
                     }
                     // editor.config.emotionsShow = 'value';
                     editor.create();
-                    editor.$txt.html(this.info.article.content);
+                    // editor.$txt.html(this.info.article.content);
                     editor.onchange = function () {
                         // onchange 事件中更新数据
                         self.info.article.content = editor.$txt.html();
@@ -174,7 +196,7 @@
                 }
             },
             handlePictureCardPreview(){
-                console.log("handlePictureCardPreview....");
+                // console.log("handlePictureCardPreview....");
                 this.dialogVisible = true;
             },
             handleRemove(file, fileList) {
@@ -182,8 +204,7 @@
             },
             onSave(){
                 let {message}=this.state;
-                console.log(this.info);
-
+                // console.log(this.info);
                 let {article}=this.info;
                 this.$refs['form'].validate((valid)=>{
                     if(valid){

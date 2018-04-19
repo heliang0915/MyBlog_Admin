@@ -67,7 +67,19 @@ export const FETCH_MENU_LIST="FETCH_MENU_LIST";
 export const FETCH_MENUS="FETCH_MENUS";
 //保存
 export const MENU_SAVE="MENU_SAVE";
-//获取用户信息
+//获取菜单信息
 export const FETCH_MENU_SINGLE="FETCH_MENU_SINGLE";
 export const RESET_MENU="RESET_MENU";
 export const DELETE_MENU="DELETE_MENU";
+
+
+//评论常量
+
+export const FETCH_COMMENT_LIST="FETCH_COMMENT_LIST";
+export const FETCH_COMMENTS="FETCH_COMMENTS";
+//保存
+export const COMMENT_SAVE="COMMENT_SAVE";
+//获取菜单信息
+export const FETCH_COMMENT_SINGLE="FETCH_COMMENT_SINGLE";
+export const RESET_COMMENT="RESET_COMMENT";
+export const DELETE_COMMENT="DELETE_COMMENT";

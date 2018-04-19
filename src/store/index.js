@@ -9,6 +9,7 @@ import article from './modules/article';
 import user from './modules/user';
 import role from './modules/role';
 import menu from './modules/menu';
+import comment from './modules/comment';
 Vue.use(Vuex);
 var store=new Vuex.Store({
     modules:{
@@ -17,7 +18,8 @@ var store=new Vuex.Store({
       article,
       user,
       role,
-      menu
+      menu,
+      comment
     }
 })
 

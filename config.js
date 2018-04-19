@@ -9,27 +9,28 @@ let config={
         port:9100,
         host:'http://localhost',
         base:"http://localhost:9100",
-        // api:'https://apiblog.butterfly.mopaasapp.com',
-        api:'http://localhost:8888',
+        api:'http://blogapi.top',
+        // api:'http://localhost:8888',
         zimg:{
-            host:"p.3w.net579.com",
-            port:"80",
+            host:"www.blogapi.top",
+            port:"4869",
             uploadPath:"/upload",
-            zImgUpload:"http://192.168.124.4/upload",
-            zImgDelete:"http://192.168.124.4/admin"
+            zImgUpload:"http://www.blogapi.top:4869/upload",
+            zImgDelete:"http://www.blogapi.top:4869/admin"
         }
     },
     production:{
         port:9200,
         host:'http://localhost',
         base:"http://localhost:9200",
-        api:'http://localhost:8888',
-         zimg:{
-            host:"192.168.124.4",
-            port:"80",
+        // api:'http://apiblog2.sturgeon.mopaasapp.com',
+        api:'https://blogapi.top',
+        zimg:{
+            host:"www.blogapi.top",
+            port:"4869",
             uploadPath:"/upload",
-            zImgUpload:"http://192.168.124.4/upload",
-            zImgDelete:"http://192.168.124.4/admin"
+            zImgUpload:"https://www.blogapi.top:4869/upload",
+            zImgDelete:"https://www.blogapi.top:4869/admin"
         }
 }
 };

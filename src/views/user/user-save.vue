@@ -44,7 +44,24 @@
                         上次使用：<img v-if="user.pic!=null" style="width: 150px;height: 150px;border-radius: 10px;" :src="user.pic" alt="">
                     </el-form-item>
                     <el-form-item prop="loginType" label="登录方式" >
-                        <el-input v-model="user.loginType"></el-input>
+                        <el-select v-model="user.loginType" placeholder="请选择">
+                        <!--<el-input v-model="user.loginType"></el-input>-->
+                            <el-option
+                                    key="ht"
+                                    label="后台登录"
+                                    value="0">
+                            </el-option>
+                            <el-option
+                                    key="wx"
+                                    label="微信"
+                                    value="1">
+                            </el-option>
+                            <el-option
+                                    key="qq"
+                                    label="QQ"
+                                    value="2">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="onSave">保存</el-button>

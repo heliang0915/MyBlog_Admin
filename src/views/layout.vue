@@ -9,10 +9,10 @@
                         <!--<img class="logo"  alt="">-->
                         <h3>MyBlog</h3>
                     </el-col>
-                    <el-col :span="18">
+                    <el-col :span="17">
                         &nbsp;
                     </el-col>
-                    <el-col :span="2">
+                    <el-col :span="3" style="white-space: nowrap">
                         <el-dropdown>
                             <!--<i class="el-icon-setting" style="margin-right: 15px"></i>-->
                             <img class="user-photo" :src="loginUser.pic"></img>
@@ -30,7 +30,8 @@
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
-                        <span class="user">{{loginUser.name}}</span>
+                        <!--{{JSON.stringify(loginUser)}}-->
+                        <span class="user">{{(loginUser.loginType==1||loginUser.loginType==2)?loginUser.nickName: loginUser.name}}</span>
                     </el-col>
                 </el-row>
             </el-header>
@@ -159,6 +160,16 @@
                 loginUser:'getUserInfo'
             })
         },
+        filters:{
+            formatUserName(val){
+
+                if(val=="1"||val=="2"){
+                    return this.loginUser.nickName;
+                }else {
+                    return this.loginUser.name;
+                }
+            }
+        },
         //给服务器端使用的方法
         asyncData(store){
             console.log('asyncData...');
@@ -179,7 +190,7 @@
                 main.style.height=(winH-headerH-footerH)+"px"
             }
             this.fetchMenus(-1);
-            this.fetchUserInfo('1ef4da32d14342f7b9061e8f5c0a5025');
+            this.fetchUserInfo('818aab3e4a9f4cd4bcd81c275a3677ae');
         }
     }
 </script>

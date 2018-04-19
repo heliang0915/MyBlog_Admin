@@ -29,6 +29,10 @@ const menuSaveComponent=  r => require.ensure([], () => r(require('../views/menu
 //权限
 const rightComponent=  r => require.ensure([], () => r(require('../views/right/right-index.vue')), 'rightComponent')
 
+//评论
+const commentComponent=  r => require.ensure([], () => r(require('../views/comment/comment-list.vue')), 'commentComponent')
+const replyComponent=  r => require.ensure([], () => r(require('../views/comment/reply-list.vue')), 'replyComponent')
+
 //404
 const notFoundComponent=  r => require.ensure([], () => r(require('../views/NotFound.vue')), 'noFoundComponent')
 
@@ -47,7 +51,10 @@ export default {
     menuListComponent,
     menuSaveComponent,
     rightComponent,
+    commentComponent,
+    replyComponent,
     notFoundComponent,
+
 }
 
 //

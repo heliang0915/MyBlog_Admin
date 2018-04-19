@@ -7,6 +7,7 @@ var ExtractTextPlugin=require("extract-text-webpack-plugin");
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var HtmlWebpackPlugin=require("html-webpack-plugin");
+var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 var webpack=require("webpack");
 
 //定义公共路径
@@ -85,8 +86,20 @@ module.exports = {
     },
     plugins: isProd?
         [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: { warnings: false }
+            // new webpack.optimize.UglifyJsPlugin({
+            //     compress: { warnings: false }
+            // }),
+
+            new ParallelUglifyPlugin({
+                cacheDir: '.cache/',
+                uglifyJS:{
+                    output: {
+                        comments: false
+                    },
+                    compress: {
+                        warnings: false
+                    }
+                }
             }),
             // new HtmlWebpackPlugin({
             //     compress: { warnings: false }

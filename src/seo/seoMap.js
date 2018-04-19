@@ -107,6 +107,22 @@ let seoMap={
         },
         component:component.rightComponent
     },
+    "/comment":{
+        seo:{
+            title:"评论",
+            keywords:"评论",
+            description:"评论",
+        },
+        component:component.commentComponent
+    },
+    "/reply":{
+        seo:{
+            title:"回复",
+            keywords:"回复",
+            description:"回复",
+        },
+        component:component.replyComponent
+    },
     // "/about":{
     //     seo: {
     //         title: "关于",

@@ -39,7 +39,7 @@ export default function(url,req){
             url=apiURl+pathName+"?"+queryStr;
         }
     }
-    console.log("代理后的url地址[%s]",url+"?temp="+Math.random())
+    console.log("代理后的url地址[%s]",url)
     console.log("Method [%s]",req.method)
     let params={}
     if(req.method=="POST"){
