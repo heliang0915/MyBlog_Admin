@@ -13,7 +13,7 @@
                     <el-form-item prop="rank" label="等级" >
 
                         <!--<el-input v-model="menu.rank"></el-input>-->
-                        <el-select v-model="menu.rank" placeholder="等级">
+                        <el-select @change="onChange" v-model="menu.rank" placeholder="等级">
                             <el-option
                                     v-for="i in 3"
                                     :key="i"
@@ -74,6 +74,9 @@
             ...mapActions(['menuSave','fetchMenu','resetMenuForm']),
             onBack(){
                 this.$router.push("/menu");
+            },
+            onChange(){
+                alert("change");
             },
             onSave(){
                 let {message}=this.state;
