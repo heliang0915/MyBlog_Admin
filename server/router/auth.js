@@ -4,13 +4,13 @@
  * */
 import express from 'express';
 import userQuery from '../query/userQuery';
-import sessionHelper from '../util/sessionHelper';
+// import sessionHelper from '../util/sessionHelper';
 let router = express.Router();
 
 router.route("/logout/:uuid").all((req, res, next) => {
-    var sh = new sessionHelper(req.session);
+    // var sh = new sessionHelper(req.session);
     var uuid = req.params.uuid;
-    sh.deleteAttr(uuid);
+    // sh.deleteAttr(uuid);
     console.log(`删除----${uuid}`);
     res.send(`删除${uuid}`)
 });

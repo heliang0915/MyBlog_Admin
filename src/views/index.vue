@@ -89,13 +89,13 @@
         },
         //给服务器端使用的方法
         asyncData(store){
-            console.dir("asyncData..."+store.store);
-            store=store.store?store.store:store;
-            store.dispatch('fetchIndexList')
+            // console.dir("asyncData..."+store.store);
+            // store=store.store?store.store:store;
+            // store.dispatch('fetchIndexList')
         },
         mounted(){
             console.log('mounted....');
-            this.fetchIndexList();
+            // this.fetchIndexList();
         },
         methods:{
             ...mapActions(['fetchIndexList']),
