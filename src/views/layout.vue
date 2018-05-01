@@ -190,7 +190,7 @@
                 main.style.height=(winH-headerH-footerH)+"px"
             }
             this.fetchMenus(-1);
-            this.fetchUserInfo('818aab3e4a9f4cd4bcd81c275a3677ae');
+            this.fetchUserInfo('29cc47047bb9497487ce2de4adae502a');
         }
     }
 </script>

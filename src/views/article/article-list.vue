@@ -21,7 +21,7 @@
                         <el-select v-model="key.tag" placeholder="分类">
                             <el-option
                                     v-for="item in articleState.innerChannels"
-                                    :key="item.name"
+                                    :key="item.uuid+item.name"
                                     :label="item.name"
                                     :value="item.uuid">
                             </el-option>
