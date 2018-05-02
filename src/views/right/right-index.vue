@@ -1,135 +1,163 @@
 <template>
-    <div>
-        <!--权限-&#45;&#45;{{uuid}}-->
-        <!--{{menuStruct}}-->
+    <layout :hastable="false">
+    <div style="background-color: #FFF">
+        <!--{{form.menus}}-->
+        <el-row>
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-checkbox-group v-model="form.menus">
+            <ul class="first-menu">
+                <li v-for="first in menuStruct">
+                    <h2>
+                        <el-checkbox  type="menus" :label="first.uuid">
+                            <template>
+                                <h2>{{first.name}}</h2>
+                            </template>
+                        </el-checkbox>
+                    </h2>
+                    <ul class="second-menu" >
+                        <li v-for="(second,secondIndex) in first.children">
+                            <h3>
+                                <el-checkbox type="menus" :label="second.uuid">
+                                    <template>
+                                        <h3>{{second.name}}</h3>
+                                    </template>
+                                </el-checkbox>
+                            </h3>
+                            <ul class="three-menu">
+                                <li v-for="three in second.children" >
+                                    <ul>
+                                        <li>
+                                            <el-checkbox :label="three.uuid" >
+                                                <template>
+                                                    <h4>{{three.name}}</h4>
+                                                </template>
+                                            </el-checkbox>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </el-checkbox-group>
 
-
-        <!--<el-row :gutter="24">-->
-            <!--<el-col :span="24"><div class="grid-content bg-purple">根节1</div></el-col>-->
-        <!--</el-row>-->
-
-        <!--<el-row :gutter="24">-->
-            <!--<el-col :span="22" :offset="2"><div class="grid-content bg-purple">二级1</div></el-col>-->
-        <!--</el-row>-->
-
-        <ul class="first-menu">
-            <li>
-                <h2>
-
-                </h2>
-                <ul class="second-menu">
-                    <li>
-                        <h3>二级1</h3>
-                        <ul class="three-menu">
-                            <li>
-                                <ul>
-                                    <li>三级1</li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul>
-                                    <li>三级2</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h3>二级2</h3>
-                        <ul>
-                            <li>
-                                <ul>
-                                    <li>三级3</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <!--<li>-->
-                <!--<h2>根节2</h2>-->
-                <!--<ul>-->
-                    <!--<li>-->
-                        <!--<h3>二级</h3>-->
-                        <!--<ul>-->
-                            <!--<li>-->
-                                <!--<h4>三级</h4>-->
-                                <!--<ul>-->
-                                    <!--<li>1111</li>-->
-                                <!--</ul>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
-
-                <!--</ul>-->
-            <!--</li>-->
-        </ul>
+            <el-form-item>
+                <el-button type="primary" @click="onSave">保存</el-button>
+                <el-button @click="onBack">返回</el-button>
+            </el-form-item>
+        </el-form>
+        </el-row>
     </div>
+    </layout>
 </template>
 <style>
-     .first-menu{
-         /*display: flex;*/
-
-     }
-    .second-menu{
+    /*.el-main{*/
+        /*background-color: #FFF !important;*/
+    /*}*/
+    h2{
+        font-size: 24px;
+    }
+    h3{
+        font-size: 20px;
+    }
+    h4{
+        font-size: 16px;
+    }
+    .first-menu {
+        font-size: 26px !important;
         display: flex;
+        padding: 30px;
+        flex-wrap: wrap;
+
     }
-     .second-menu li{
-         margin:10px;
-     }
-    .three-menu{
-        /*display: flex;*/
+
+    .first-menu > li{
+        margin-bottom: 20px;
+        margin-right: 100px;
     }
-  .el-row {
-          margin-bottom: 20px;
-   }
-     .el-row:last-child {
-          margin-bottom: 0;
-     }
-     .el-col {
-         border-radius: 4px;
-     }
-     .bg-purple-dark {
-         background: #99a9bf;
-     }
-     .bg-purple {
-         background: #d3dce6;
-     }
-     .bg-purple-light {
-         background: #e5e9f2;
-     }
-     .grid-content {
-         border-radius: 4px;
-         min-height: 36px;
-     }
-     .row-bg {
-         padding: 10px 0;
-         background-color: #f9fafc;
-     }
+
+    .second-menu {
+        display: flex;
+        padding: 24px 0 10px 10px;
+
+    }
+    .second-menu li{
+        margin-left: 14px;
+    }
+
+    .three-menu {
+        padding: 5px 0 10px 0;
+    }
+
+    .three-menu > li {
+        padding: 2px;
+    }
+
+
 </style>
 <script>
-    import {mapActions,mapGetters} from 'vuex';
+    import {mapActions, mapGetters} from 'vuex';
+    import layout from '../layout';
     export default {
-        data(){
-            return{
-                uuid:this.$route.params.uuid
+        data() {
+            return {
+                form:{
+                    menus:[]
+                },
+                roleId: this.$route.params.uuid
             }
         },
-        mounted(){
-            this.fetchMenus(-1);
-            // console.log(this.$route.params);
+        components:{
+            layout
         },
-        computed:{
+        computed: {
             ...mapGetters({
-                menuStruct:'getMenus'
+                menuStruct: 'getMenus'
             })
         },
-        //给服务器端使用的方法
-        asyncData(store){
-            console.log('asyncData...');
-            // store.dispatch('fetchIndexList')
+        mounted() {
+            // alert(this.roleId);
+            this.fetchMenus(-1);
         },
-        methods:{
-            ...mapActions(['fetchMenus'])
-        },
+        methods: {
+            ...mapActions(['fetchMenus']),
+            onBack(){
+                this.$router.push("/role");
+            },
+            onSave(){
+
+
+                // let {message}=this.state;
+
+                // this.$refs['form'].validate((valid)=>{
+                //     console.log(this.role);
+                //     if(valid){
+                //         this.roleSave({role:this.role,fn:()=>{
+                //                 let msg="保存成功";
+                //                 let {flag,err}=message;
+                //                 if(flag!=1){
+                //                     msg=err;
+                //                 }else{
+                //                     if(!this.role.uuid){
+                //                         this.resetRoleForm();
+                //                     }else{
+                //                         setTimeout(()=>{
+                //                             this.onBack();
+                //                         },500)
+                //                     }
+                //                 }
+                //                 this.$message({
+                //                     message:msg,
+                //                     type:(flag!=1)?'error':'success'
+                //                 })
+                //             }});
+                //
+                //     }
+                // })
+            }
+        }
     }
+
+
 </script>
