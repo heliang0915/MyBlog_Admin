@@ -9,8 +9,8 @@ let config={
         port:9100,
         host:'http://localhost',
         base:"http://localhost:9100",
-        // api:'http://blogapi.top',
-        api:'http://localhost:8080',
+        api:'http://blogapi.top',
+        // api:'http://localhost:8080',
         zimg:{
             host:"www.blogapi.top",
             port:"4869",

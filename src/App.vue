@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" v-cloak>
         <transition name="fade-router" mode="in-out">
             <router-view></router-view>
         </transition>

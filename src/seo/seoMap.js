@@ -123,6 +123,14 @@ let seoMap={
         },
         component:component.replyComponent
     },
+    "/login":{
+        seo:{
+            title:"登录",
+            keywords:"登录",
+            description:"登录",
+        },
+        component:component.loginComponent
+    },
     // "/about":{
     //     seo: {
     //         title: "关于",

@@ -37,6 +37,7 @@ const replyComponent=  r => require.ensure([], () => r(require('../views/comment
 //404
 const notFoundComponent=  r => require.ensure([], () => r(require('../views/NotFound.vue')), 'noFoundComponent')
 
+const loginComponent=r=>require.ensure([], () => r(require('../views/login/login.vue')), 'loginComponent')
 
 export default {
     indexComponent,
@@ -55,6 +56,7 @@ export default {
     // rightEditComponent,
     commentComponent,
     replyComponent,
+    loginComponent,
     notFoundComponent,
 
 }
