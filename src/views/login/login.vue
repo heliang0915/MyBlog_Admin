@@ -34,7 +34,6 @@
     .login-bg {
         width: 500px;
         background: rgba(255, 255, 255, .4);
-        /*border-radius: 10px;*/
         position: absolute;
         top: 50%;
         left: 50%;
@@ -73,7 +72,7 @@
     }
 
     .rem-area a {
-        color: #333;
+        color: #FFF;
         font-size: 14px;
         text-decoration: none;
     }
@@ -96,10 +95,10 @@
 
     .el-checkbox {
         margin-left: 4px;
+        color: #FFF;
     }
     .el-input__inner{
         width: 80%;
-        /*padding:;*/
         height: 48px;
     }
 
@@ -118,7 +117,7 @@
     export default {
         data() {
             return {
-                h: 0,
+                h: 762,
                 checked: false,
                 w: 0,
                 user: {
