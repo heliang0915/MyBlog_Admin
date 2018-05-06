@@ -28,7 +28,7 @@ const menuSaveComponent=  r => require.ensure([], () => r(require('../views/menu
 
 //权限
 const rightComponent=  r => require.ensure([], () => r(require('../views/right/right-index.vue')), 'rightComponent')
-const rightEditComponent=  r => require.ensure([], () => r(require('../views/right/right-edit.vue')), 'rightEditComponent')
+// const rightEditComponent=  r => require.ensure([], () => r(require('../views/right/right-edit.vue')), 'rightEditComponent')
 
 //评论
 const commentComponent=  r => require.ensure([], () => r(require('../views/comment/comment-list.vue')), 'commentComponent')
@@ -52,7 +52,7 @@ export default {
     menuListComponent,
     menuSaveComponent,
     rightComponent,
-    rightEditComponent,
+    // rightEditComponent,
     commentComponent,
     replyComponent,
     notFoundComponent,

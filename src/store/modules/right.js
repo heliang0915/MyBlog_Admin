@@ -1,9 +1,9 @@
 import * as types from '../mutaion-types';
-import menuQuery from '../../api/menuQuery';
+import rightQuery from '../../api/rightQuery';
+import roleQuery from "../../api/roleQuery";
 
 const state={
-    rights:[],
-    menuStruct:[],
+    menuStructure:[],
     fetching:true,
     message:{
         flag:0,
@@ -12,25 +12,37 @@ const state={
 }
 
 const mutations={
-
     [types.FETCH_MENU_RIGHT](state,payload){
         console.log("FETCH_MENUS>>>>"+payload);
         state.fetching=false;
-        state.menuStruct=payload;
-    }
+        state.menuStructure=payload;
+    },
+    [types.RIGHT_SAVE](state,payload){
+        let mes=payload;
+        if(mes=="ok"){
+            state.message.flag=1;
+        }else{
+            state.message.flag=0;
+            state.message.err=mes;
+        }
+    },
 }
 
 const actions={
-    fetchMenuList:async ({commit},{cur,params})=>{
-        var pageInfo= await  menuQuery.list({cur,params});
-        commit(types.FETCH_MENU_LIST,pageInfo)
+    fetchRightMenuList:async ({commit},roleId)=>{
+        var menuStructure= await  rightQuery.listByRank(roleId);
+        commit(types.FETCH_MENU_RIGHT,menuStructure)
+    },
+    rightSave:async ({commit},{roleId,menus,fn})=>{
+        var message= await rightQuery.saveRightMenu(roleId,menus);
+        commit(types.RIGHT_SAVE,message);
+        fn==null?function () {}:fn();
     }
-
-
 
 }
 const getters={
-    getMenuList:(state)=>state
+    getRightMenuList:(state)=>state.menuStructure,
+    getRightSaveState:(state)=>state
 }
 
 module.exports={

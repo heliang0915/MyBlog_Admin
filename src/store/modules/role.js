@@ -34,7 +34,7 @@ const mutations={
         }
     },
     [types.FETCH_ROLE_SINGLE](state,payload){
-        state.role=payload;
+        state.role=(payload==""?{}:payload);
     },
     [types.RESET_ROLE](state,payload){
         state.role={

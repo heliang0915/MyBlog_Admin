@@ -88,3 +88,4 @@ export const DELETE_COMMENT="DELETE_COMMENT";
  * 权限常量
  */
 export const FETCH_MENU_RIGHT="FETCH_MENU_RIGHT";
+export const RIGHT_SAVE="RIGHT_SAVE";
