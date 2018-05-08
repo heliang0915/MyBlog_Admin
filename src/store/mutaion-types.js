@@ -89,3 +89,9 @@ export const DELETE_COMMENT="DELETE_COMMENT";
  */
 export const FETCH_MENU_RIGHT="FETCH_MENU_RIGHT";
 export const RIGHT_SAVE="RIGHT_SAVE";
+
+
+/**
+ * 登录
+ */
+export const FETCH_LOGIN="FETCH_LOGIN"

@@ -13,7 +13,7 @@
                 </div>
                 <div class="rem-area">
                     <el-checkbox v-model="checked">记住账号</el-checkbox>
-                    <a href="#">忘记密码?</a>
+                    <a href="#">忘记密码? ===={{JSON.stringify(loginState)}}</a>
                 </div>
                 <div class="btn-area">
                     <button  @click="login" class="login-btn">登录</button>
@@ -114,6 +114,7 @@
     }
 </style>
 <script>
+    import {mapActions,mapGetters} from 'vuex';
     export default {
         data() {
             return {
@@ -139,7 +140,13 @@
             // document.body.height=winHeight+"px";
             this.h = winHeight;
         },
+        computed:{
+            ...mapGetters({
+                loginState:'getLoginState',
+            })
+        },
         methods: {
+            ...mapActions(['fetchLogin']),
             login(e) {
                 e.preventDefault();
                 let {userName, password} = this.user;
@@ -149,8 +156,10 @@
                         alert(password);
                         // setTimeout(()=>{
                         this.w = 99;
+                        this.fetchLogin({userName,password});
                     }else{
                         alert("不提交");
+
                     }
                 });
             }

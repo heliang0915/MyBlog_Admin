@@ -3,7 +3,7 @@
  */
 
 import * as types from '../mutaion-types';
-import {getIndexData} from '../../api/index';
+import {getIndexData,loginDo} from '../../api/index';
 
 
 /*
@@ -12,7 +12,8 @@ import {getIndexData} from '../../api/index';
 * */
 const state={
    list:[],
-   fetching:true
+   fetching:true,
+   resp:{}
 }
 
 /**
@@ -23,6 +24,10 @@ const mutations={
     [types.FETCH_INDEX_LIST](state,payload){
         state.fetching=false;
         state.list=payload;
+    },
+    [types.FETCH_LOGIN](state,payload){
+        state.fetching=false;
+        state.resp=payload;
     }
 }
 
@@ -31,25 +36,25 @@ const mutations={
  * @type {{fetchIndexList: function({commit: *})}}
  */
 const actions={
-    fetchIndexList:({commit})=>{
-        // console.log(`url>>>>http://localhost:${port}/data`);
-        // return fetch.get(`${host}:`+port+'/data').then((res)=>res.data).then((data)=>{
-        //     console.log("data>>"+data);
+    fetchIndexList:async ({commit})=>{
+        let  data=await getIndexData();
+        commit(types.FETCH_INDEX_LIST,data)
+        //  getIndexData((data)=>{
         //     commit(types.FETCH_INDEX_LIST,data)
-        // });
-        return getIndexData((data)=>{
-            commit(types.FETCH_INDEX_LIST,data)
-        })
-
+        // })
+    },
+    fetchLogin:async ({commit},{userName,password})=>{
+        let  data=await loginDo(userName,password);
+        commit(types.FETCH_LOGIN,data)
     }
 }
 
 //定义getters
 const getters={
     getIndexList:state=>{
-        // console.log(state);
         return state
-    }
+    },
+    getLoginState:state=>state.resp
 }
 
 export default {
