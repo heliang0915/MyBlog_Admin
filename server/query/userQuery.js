@@ -5,6 +5,8 @@
  */
 import fetch from '../util/fetch';
 import {conf} from '../../config';
+
+//Admin 服务器调用Back服务器
 let userQuery={
     //查询
     getUserInfo:(uuid,req)=>{
@@ -15,6 +17,16 @@ let userQuery={
                 }).catch((err)=>{
                     reject(err);
                 })
+        })
+    },
+    login(req){
+        return new Promise((resolve,reject)=>{
+            fetch(`${conf.api}/login/`,req).then((response)=>{
+                let {data} =response;
+                resolve(data)
+            }).catch((err)=>{
+                reject(err);
+            })
         })
     }
 }

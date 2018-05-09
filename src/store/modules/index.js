@@ -43,9 +43,12 @@ const actions={
         //     commit(types.FETCH_INDEX_LIST,data)
         // })
     },
-    fetchLogin:async ({commit},{userName,password})=>{
-        let  data=await loginDo(userName,password);
+    fetchLogin:async ({commit},{name,pwd,fn})=>{
+        let  data=await loginDo(name,pwd);
+        // console.dir(commit);
+        // console.log("data>>>>>>>>>"+data);
         commit(types.FETCH_LOGIN,data)
+        fn==null?function () {}:fn(data);
     }
 }
 

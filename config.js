@@ -3,14 +3,13 @@ let vueEnv=process.env.VUE_ENV||"client";
 let cacheTime=24*60*60*60*1000;
 //全局模板文件
 let templateName="template";
-
 let config={
     development:{
         port:9100,
         host:'http://localhost',
         base:"http://localhost:9100",
-        api:'http://blogapi.top',
-        // api:'http://localhost:8080',
+        // api:'http://blogapi.top',
+        api:'http://localhost:8080',
         zimg:{
             host:"www.blogapi.top",
             port:"4869",

@@ -34,4 +34,17 @@ router.route("/login/:uuid").all((req, res, next) => {
         });
     }
 })
+
+
+router.post('/login',function(req,res){
+    userQuery.login(req).then(({data}) => {
+        let flag = data;
+        if(flag==false){
+            res.send(false);
+        }else{
+            res.cookie('token', flag, { domain: 'localhost', path: '/',HttpOnly:true });
+            res.send(true);
+        }
+    })
+})
 export default router;

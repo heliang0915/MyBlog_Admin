@@ -17,11 +17,12 @@ const getIndexData=()=>{
 
 }
 
-const  loginDo=(userName,password)=>{
+const  loginDo=(name,pwd)=>{
+
     return  new Promise((reslove,reject)=> {
-        fetch.post(`${conf.base}/api/login`, {
-            userName,
-            password
+        fetch.post(`/auth/login`, {
+            name,
+            pwd
         }).then((res) => res.data).then((data) => {
             reslove(data)
         }).catch((err)=>{

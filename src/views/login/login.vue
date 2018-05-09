@@ -13,15 +13,15 @@
                 </div>
                 <div class="rem-area">
                     <el-checkbox v-model="checked">记住账号</el-checkbox>
-                    <a href="#">忘记密码? ===={{JSON.stringify(loginState)}}</a>
+                    <a href="#">忘记密码?</a>
                 </div>
                 <div class="btn-area">
                     <button  @click="login" class="login-btn">登录</button>
                 </div>
-                <div class="loadding" :style="{width:w+'%'}"></div>
+                <!--<div class="loadding" :style="{width:w+'%'}"></div>-->
             </div>
         </el-form>
-
+        <!--<el-button :plain="true" @click="open4">错误</el-button>-->
     </main>
 </template>
 <style>
@@ -102,16 +102,16 @@
         height: 48px;
     }
 
-    .loadding {
-        width: 0%;
-        height: 2px;
-        border-radius: 10px;
-        background: #ff561b;
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: 1s width;
-    }
+    /*.loadding {*/
+        /*width: 0%;*/
+        /*height: 2px;*/
+        /*border-radius: 10px;*/
+        /*background: #ff561b;*/
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*transition: 1s width;*/
+    /*}*/
 </style>
 <script>
     import {mapActions,mapGetters} from 'vuex';
@@ -120,7 +120,7 @@
             return {
                 h: 762,
                 checked: false,
-                w: 0,
+                // w: 0,
                 user: {
                     userName: '',
                     password: ''
@@ -152,14 +152,14 @@
                 let {userName, password} = this.user;
                 this.$refs['form'].validate((valid)=>{
                     if(valid) {
-                        alert(userName);
-                        alert(password);
-                        // setTimeout(()=>{
-                        this.w = 99;
-                        this.fetchLogin({userName,password});
-                    }else{
-                        alert("不提交");
-
+                        this.fetchLogin({name:userName,pwd:password,fn:(data)=>{
+                                // this.w = 100;
+                                if(data==false){
+                                    this.$message.error('用户名或密码错误，请稍候重试');
+                                }else{
+                                   window.location.replace("/");
+                                }
+                            }});
                     }
                 });
             }
