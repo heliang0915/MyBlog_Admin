@@ -9,9 +9,10 @@ import auth from './router/auth';
 import {useLog,fileLog} from './logs/logs';
 import index from './router/';
 import fs from 'fs';
-import  session from 'express-session';
 import compression from 'compression';
 let App=express();
+
+
 
 //日志配置
 useLog(App);
@@ -20,19 +21,6 @@ useLog(App);
 App.use(compression({
     threshold:0
 }));
-// App.use(debug('dev'));
-//启用session
-App.use(session({
-////这里的name值得是cookie的name，默认cookie的name是：connect.sid
-//     name: 'blog',
-    secret: 'keyboard cat',
-    // cookie: ('name', 'value', { path: '/', httpOnly: true,secure: false, maxAge:  60000 }),
-    //重新保存：强制会话保存即使是未修改的。默认为true但是得写上
-    resave: true,
-    //强制“未初始化”的会话保存到存储。
-    saveUninitialized: true,
-
-}))
 
 App.use(cookieParser());
 App.use(bodyParser.json());
@@ -51,17 +39,26 @@ App.use((req,res,next)=>{
 })
 App.use('/assets',express.static(path.join(__dirname,'/../server/public/')));
 
-App.use((req,res,next)=>{
-
-    console.log("sessionID:"+req.sessionID);
-    console.log("req.session.cookie :"+req.blog );
-    // sessionHelper.getAttr();
-
-    next();
-});
-App.use("/api/",api)
+App.use("/api/",api);
 App.use("/upload",upload);
 App.use("/auth",auth);
+
+//读取cookie 判断权限
+App.use((req,res,next)=>{
+    // console.log(req.cookies);
+    let {token}=req.cookies;
+    let url=req.originalUrl;
+    console.log("url>>>>>>>>"+url)
+    console.log("token>>>>>>>>"+token)
+    if(token||url.indexOf("/login")>-1){
+        console.log("放过去....");
+        next();
+    }else{
+        console.log("拦截....");
+        // res.redirect("/login");
+        res.send('拦截....');
+    }
+});
 
 
 App.use("/",index);

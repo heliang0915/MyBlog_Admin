@@ -16,6 +16,7 @@ const clientManifest = require('../../dist/vue-ssr-client-manifest.json');
 //     template=template.replace(reg,'');
 // }
 
+
 let renderer=createBundleRenderer(serverBundle,{
     template,
     clientManifest,
@@ -28,7 +29,7 @@ let mergeContext=(context,path)=>{
     // if(path.indexOf(".html")>-1){
     //     tmp=path.substr(0,path.lastIndexOf("/"))+"/:uuid.html";
     // }
-    console.log("tmp>>>>>>"+tmp);
+    // console.log("tmp>>>>>>"+tmp);
     let seoItem=seoMap[tmp];
     if(seoItem){
         let {seo}=seoItem;
@@ -54,6 +55,8 @@ router.route("*").all((req,res,next)=>{
         title: '默认标题',
         url:req.originalUrl
     }
+
+    console.log("router.route###################"+req.originalUrl);
 
     context=mergeContext(context,req.originalUrl);
     const s = Date.now()
