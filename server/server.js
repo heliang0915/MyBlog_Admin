@@ -50,13 +50,15 @@ App.use((req,res,next)=>{
     let url=req.originalUrl;
     console.log("url>>>>>>>>"+url)
     console.log("token>>>>>>>>"+token)
-    if(token||url.indexOf("/login")>-1){
+    if(token||url.indexOf("login")>-1){
         console.log("放过去....");
         next();
     }else{
         console.log("拦截....");
         // res.redirect("/login");
-        res.send('拦截....');
+        // console.('拦截....');
+        // next();
+        res.redirect("/login");
     }
 });
 
