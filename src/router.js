@@ -1,5 +1,5 @@
 /**
- *
+ * 客户端路由
  */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -10,8 +10,8 @@ export function createRouter() {
 }
 let routes=[];
 Object.keys(seoMap).map((path)=>{
-    let {component}=seoMap[path];
-    routes.push({path,component});
+    let {component,name}=seoMap[path];
+    routes.push({path,component,name});
 })
 let getConfig = () => {
     let config = {};

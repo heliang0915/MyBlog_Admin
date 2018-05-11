@@ -28,6 +28,16 @@ let userQuery={
                 reject(err);
             })
         })
+    },
+    checkToken(token){
+        return new Promise((resolve,reject)=>{
+            fetch(`${conf.api}/checkToken`,null,"POST",{token}).then((response)=>{
+                let {data} =response;
+                resolve(data)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
     }
 }
 

@@ -8,6 +8,7 @@
                         <el-input v-model="user.userName"  placeholder="请输入您的用户名"></el-input>
                     </el-form-item>
                     <el-form-item prop="password">
+                         {{user.password}}
                         <el-input v-model="user.password"  type="password" placeholder="请输入您的密码"></el-input>
                     </el-form-item>
                 </div>

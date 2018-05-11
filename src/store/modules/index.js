@@ -13,7 +13,8 @@ import {getIndexData,loginDo} from '../../api/index';
 const state={
    list:[],
    fetching:true,
-   resp:{}
+   resp:{},
+   token:null
 }
 
 /**
@@ -50,6 +51,7 @@ const actions={
         commit(types.FETCH_LOGIN,data)
         fn==null?function () {}:fn(data);
     }
+
 }
 
 //定义getters

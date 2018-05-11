@@ -62,6 +62,16 @@ let userQuery={
                 reject(err);
             })
         })
+    },
+    checkToken(token){
+        return new Promise((resolve,reject)=>{
+            fetch.post(`${conf.base}/api/checkToken`,{token}).then((response)=>{
+                let {data} =response;
+                resolve(data)
+            }).catch((err)=>{
+                reject(err);
+            })
+        })
     }
 }
 

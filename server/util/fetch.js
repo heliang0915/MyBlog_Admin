@@ -21,7 +21,7 @@ let createHeader=(header)=>{
 
 
 //转发请求
-export default function(url,req){
+export default function(url,req,type,para){
     let apiURl=conf.api;
     if(url.indexOf("/api/")>-1){
         let urlReg=/(\/\w+)/;
@@ -39,14 +39,29 @@ export default function(url,req){
             url=apiURl+pathName+"?"+queryStr;
         }
     }
-    console.log("代理后的url地址[%s]",url)
-    console.log("Method [%s]",req.method)
-    let params={}
-    if(req.method=="POST"){
-        params=req.body;
+
+    let params={};
+    let method="GET";
+    if(req){
+        method=req.method;
+    }else if(type){
+        method=type;
     }
+
+    console.log(para)
+    if(method=="POST"&&req){
+        params=req.body;
+    }else if(method=="POST"&&para){
+        params=para;
+    }
+
+    console.log("代理后的url地址[%s]",url)
+    console.log("Method [%s]",method)
+    console.log("params [%s]",JSON.stringify(params))
+
+
     return new Promise((resolve,reject)=>{
-        axios[req.method.toString().toLowerCase()](url,params)
+        axios[method.toLowerCase()](url,params)
         // axios({
         //     method: req.method.toString().toLowerCase(),
         //     url: url+"?temp="+Math.random(),

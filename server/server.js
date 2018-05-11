@@ -10,6 +10,7 @@ import {useLog,fileLog} from './logs/logs';
 import index from './router/';
 import fs from 'fs';
 import compression from 'compression';
+import userQuery from './query/userQuery';
 let App=express();
 
 
@@ -45,20 +46,26 @@ App.use("/auth",auth);
 
 //读取cookie 判断权限
 App.use((req,res,next)=>{
-    // console.log(req.cookies);
     let {token}=req.cookies;
     let url=req.originalUrl;
-    console.log("url>>>>>>>>"+url)
-    console.log("token>>>>>>>>"+token)
-    if(token||url.indexOf("login")>-1){
-        console.log("放过去....");
+    if(url.indexOf("login")>-1){
         next();
     }else{
-        console.log("拦截....");
-        // res.redirect("/login");
-        // console.('拦截....');
-        // next();
-        res.redirect("/login");
+        console.log("拦截器 服务器端拦截....")
+        //校验token
+        userQuery.checkToken(token).then(({data},err)=>{
+            console.log("url>>>>>>>>"+url)
+            console.log("token>>>>>>>>"+token)
+            let isValidate=data;
+            console.dir(isValidate);
+            if(isValidate){
+                console.log("放过去....");
+                next();
+            }else{
+                console.log("拦截....");
+                res.redirect("/login");
+            }
+        });
     }
 });
 

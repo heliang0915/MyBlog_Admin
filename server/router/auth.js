@@ -42,7 +42,8 @@ router.post('/login',function(req,res){
         if(flag==false){
             res.send(false);
         }else{
-            res.cookie('token', flag, {domain: 'localhost',path: '/',httpOnly: true ,maxAge:900000 });
+            console.log(`#############data$$$$$$$$$$$#####${data}`);
+            res.cookie('token',data,{domain: 'localhost',path: '/',httpOnly:false,maxAge:900000});
             res.send(true);
         }
     })

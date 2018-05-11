@@ -9,6 +9,7 @@ let seoMap={
             keywords:"首页关键字",
             description:"首页描述",
         },
+        name:"index",
         component:component.indexComponent
     },
     "/edit":{
@@ -17,6 +18,7 @@ let seoMap={
             keywords:"编辑",
             description:"编辑",
         },
+        name:"edit",
         component:component.indexEditComponent
     },
     "/channel":{
@@ -25,6 +27,7 @@ let seoMap={
             keywords:"频道列表",
             description:"频道列表",
         },
+        name:"channel",
         component:component.channelListComponent
     },
     "/channel/save":{
@@ -33,6 +36,7 @@ let seoMap={
             keywords:"频道编辑",
             description:"频道编辑",
         },
+        name:"channelSave",
         component:component.channelSaveComponent
     },
     "/article":{
@@ -41,6 +45,7 @@ let seoMap={
             keywords:"文章列表",
             description:"文章列表",
         },
+        name:"article",
         component:component.articleListComponent
     },
     "/article/save":{
@@ -49,6 +54,7 @@ let seoMap={
             keywords:"文章编辑",
             description:"文章编辑",
         },
+        name:"articleSave",
         component:component.articleSaveComponent
     },
     "/user":{
@@ -57,6 +63,7 @@ let seoMap={
             keywords:"用户列表",
             description:"用户列表",
         },
+        name:"user",
         component:component.userListComponent
     },
     "/user/save":{
@@ -65,6 +72,7 @@ let seoMap={
             keywords:"文章编辑",
             description:"用户编辑",
         },
+        name:"userSave",
         component:component.userSaveComponent
     },
     "/role":{
@@ -73,6 +81,7 @@ let seoMap={
             keywords:"角色列表",
             description:"角色列表",
         },
+        name:"role",
         component:component.roleListComponent
     },
     "/role/save":{
@@ -81,6 +90,7 @@ let seoMap={
             keywords:"角色编辑",
             description:"角色编辑",
         },
+        name:"roleSave",
         component:component.roleSaveComponent
     },
     "/menu":{
@@ -89,6 +99,7 @@ let seoMap={
             keywords:"菜单列表",
             description:"菜单列表",
         },
+        name:"menu",
         component:component.menuListComponent
     },
     "/menu/save":{
@@ -97,6 +108,7 @@ let seoMap={
             keywords:"菜单编辑",
             description:"菜单编辑",
         },
+        name:"menuSave",
         component:component.menuSaveComponent
     },
     "/right/:uuid":{
@@ -105,6 +117,7 @@ let seoMap={
             keywords:"权限",
             description:"权限",
         },
+        name:"right",
         component:component.rightComponent
     },
     "/comment":{
@@ -113,6 +126,7 @@ let seoMap={
             keywords:"评论",
             description:"评论",
         },
+        name:"comment",
         component:component.commentComponent
     },
     "/reply":{
@@ -121,6 +135,7 @@ let seoMap={
             keywords:"回复",
             description:"回复",
         },
+        name:"reply",
         component:component.replyComponent
     },
     "/login":{
@@ -129,6 +144,7 @@ let seoMap={
             keywords:"登录",
             description:"登录",
         },
+        name:"login",
         component:component.loginComponent
     },
     // "/about":{
@@ -153,6 +169,7 @@ let seoMap={
             keywords: "找不到了",
             description: "找不到了"
         },
+        name:"other",
         component:component.notFoundComponent
     }
 }
