@@ -16,6 +16,7 @@ let articleQuery={
                 params:params
             }).then((response)=>{
                 let {data} =response;
+                console.log(data);
                 resolve(data)
             }).catch((err)=>{
                 reject(err);

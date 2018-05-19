@@ -6,17 +6,15 @@ import {env,cacheTime} from '../config';
 import api from './router/api';
 import upload from './router/upload';
 import auth from './router/auth';
-import {useLog,fileLog} from './logs/logs';
+// import {useLog,fileLog} from './logs/logs';
 import index from './router/';
 import fs from 'fs';
 import compression from 'compression';
 import userQuery from './query/userQuery';
 let App=express();
 
-
-
 //日志配置
-useLog(App);
+// useLog(App);
 
 // 启用gzip压缩
 App.use(compression({
@@ -51,6 +49,7 @@ App.use((req,res,next)=>{
     if(url.indexOf("login")>-1){
         next();
     }else{
+        // next();
         console.log("拦截器 服务器端拦截....")
         //校验token
         userQuery.checkToken(token).then(({data},err)=>{
@@ -66,6 +65,7 @@ App.use((req,res,next)=>{
                 res.redirect("/login");
             }
         });
+
     }
 });
 
@@ -88,12 +88,14 @@ if (App.get('env') === 'development') {
         if (err.code === 404){
             res.status(404).end('Not Found')
         }else{
-            fs.readFile(path.join(__dirname,"/page/500.html"),(er,content)=>{
+            let errorPath=env!="development"?path.join(__dirname,"../../dist/server/page/500.html"):
+                path.join(__dirname,"/page/500.html");
+            fs.readFile(errorPath,(er,content)=>{
                 res.status(err.status || 500).end(content.toString());
             })
         }
 
-        fileLog.error(err.stack);
+        // fileLog.error(err.stack);
     });
 }
 
@@ -108,7 +110,7 @@ App.use(function(err, req, res, next) {
             res.status(err.status || 500).end(content.toString());
         })
     }
-    fileLog.error(err.stack);
+    // fileLog.error(err.stack);
 });
 
 

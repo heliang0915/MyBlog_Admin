@@ -33,7 +33,9 @@ let userQuery={
     },
     getUserInfo:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            fetch.get(`${conf.base}/api/user/getUserInfo/${uuid}`).then((response)=>{
+            fetch.post(`${conf.base}/api/user/getUserInfo`,{
+                uuid
+            }).then((response)=>{
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{
