@@ -9,25 +9,22 @@ import auth from './router/auth';
 // import {useLog,fileLog} from './logs/logs';
 import index from './router/';
 import fs from 'fs';
+import {useLog,fileLog} from './logs/logs';
 import compression from 'compression';
 import userQuery from './query/userQuery';
-let App=express();
-
+let app=express();
 //日志配置
-// useLog(App);
-
+useLog(app);
 // 启用gzip压缩
-App.use(compression({
+app.use(compression({
     threshold:0
 }));
-
-App.use(cookieParser());
-App.use(bodyParser.json());
-App.use(bodyParser.urlencoded({extended:false}));
-App.use('/dist',express.static(path.join(__dirname,'/../dist/')));
-App.use('/assets',express.static(path.join(__dirname,'/../assets/')));
-
-App.use((req,res,next)=>{
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
+app.use('/dist',express.static(path.join(__dirname,'/../dist/')));
+app.use('/assets',express.static(path.join(__dirname,'/../assets/')));
+app.use((req,res,next)=>{
     let date=new Date();
     date.setTime(date.getTime()+cacheTime);
     res.header("Access-Control-Allow-Origin", "*");
@@ -36,20 +33,17 @@ App.use((req,res,next)=>{
     res.header("Expires",date.toUTCString());
     next();
 })
-App.use('/assets',express.static(path.join(__dirname,'/../server/public/')));
-
-App.use("/api/",api);
-App.use("/upload",upload);
-App.use("/auth",auth);
-
+app.use('/assets',express.static(path.join(__dirname,'/../server/public/')));
+app.use("/api/",api);
+app.use("/upload",upload);
+app.use("/auth",auth);
 //读取cookie 判断权限
-App.use((req,res,next)=>{
+app.use((req,res,next)=>{
     let {token}=req.cookies;
     let url=req.originalUrl;
     if(url.indexOf("login")>-1){
         next();
     }else{
-        // next();
         console.log("拦截器 服务器端拦截....")
         //校验token
         userQuery.checkToken(token).then(({data},err)=>{
@@ -65,15 +59,11 @@ App.use((req,res,next)=>{
                 res.redirect("/login");
             }
         });
-
     }
 });
-
-
-App.use("/",index);
-
+app.use("/",index);
 // catch 404 and forward to error handler
-App.use(function(req, res, next) {
+app.use(function(req, res, next) {
     var err = new Error('Not Found');
     console.log("404");
     err.status = 404;
@@ -82,8 +72,8 @@ App.use(function(req, res, next) {
 // error handlers
 // development error handler
 // will print stacktrace
-if (App.get('env') === 'development') {
-    App.use(function(err, req, res, next) {
+// if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
         console.log(err);
         if (err.code === 404){
             res.status(404).end('Not Found')
@@ -94,35 +84,30 @@ if (App.get('env') === 'development') {
                 res.status(err.status || 500).end(content.toString());
             })
         }
-
         // fileLog.error(err.stack);
     });
-}
-
+// }
 // production error handler
 // no stacktraces leaked to user
-App.use(function(err, req, res, next) {
-    if (err.code === 404){
-        res.status(404).end('Not Found')
-    }else{
-        // res.status(err.status || 500).end("Internal Server Error "+err.stack)
-        fs.readFile(path.join(__dirname,"/page/500.html"),(er,content)=>{
-            res.status(err.status || 500).end(content.toString());
-        })
-    }
-    // fileLog.error(err.stack);
-});
-
-
-
+// app.use(function(err, req, res, next) {
+//     if (err.code === 404){
+//         res.status(404).end('Not Found')
+//     }else{
+//         // res.status(err.status || 500).end("Internal Server Error "+err.stack)
+//         fs.readFile(path.join(__dirname,"/page/500.html"),(er,content)=>{
+//             res.status(err.status || 500).end(content.toString());
+//         })
+//     }
+//     // fileLog.error(err.stack);
+// });
 if(env!="development"){
-    App.use(express.static(path.join(__dirname,"/../build/"+env)));
-    App.use(express.static(path.join(__dirname,"/../build/server")));
+    app.use(express.static(path.join(__dirname,"/../build/"+env)));
+    app.use(express.static(path.join(__dirname,"/../build/server")));
     console.log("生产状态：静态目录地址==="+path.join(__dirname,"/../build/"+env));
 }else{
-    App.use(express.static(path.join(__dirname,"/../build/"+env)));
-    App.use(express.static(path.join(__dirname,"/../build/dev_server")));
+    app.use(express.static(path.join(__dirname,"/../build/"+env)));
+    app.use(express.static(path.join(__dirname,"/../build/dev_server")));
     console.log("开发状态：静态目录地址==="+path.join(__dirname,"/../build/"+env));
 
 }
-export default App;
+export default app;

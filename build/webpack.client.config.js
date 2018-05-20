@@ -26,7 +26,6 @@ const config = merge(base, {
             filename:"libs.js?[hash]",
             minChunks:Infinity
         }),
-
         new VueSSRClientPlugin()
     ]
 })

@@ -11,7 +11,7 @@ SessionHelper.prop.setAttr=function (id,value) {
 };
 SessionHelper.prop.getAttr=function (id) {
     let map=this.session.track==null?{}:this.session.track;
-    console.log("map:"+JSON.stringify(map));
+    // console.log("map:"+JSON.stringify(map));
     return map[id];
 };
 SessionHelper.prop.deleteAttr=function (id) {

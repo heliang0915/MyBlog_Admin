@@ -69,7 +69,7 @@ const actions={
         commit(types.FETCH_COMMENT_LIST,pageInfo)
     },
     commentSave:async ({commit},{comment,fn})=>{
-        console.log("comment>>>>"+comment);
+        // console.log("comment>>>>"+comment);
         var message= await commentQuery.save(comment);
         commit(types.COMMENT_SAVE,message)
         fn==null?function () {}:fn();

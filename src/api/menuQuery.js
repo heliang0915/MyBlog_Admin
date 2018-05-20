@@ -16,7 +16,7 @@ let menuQuery={
                 sort:'rank'
             }).then((response)=>{
                 let {data} =response;
-                console.log(data);
+                // console.log(data);
                 resolve(data)
             }).catch((err)=>{
                 reject(err);
@@ -28,7 +28,7 @@ let menuQuery={
         return new Promise((resolve,reject)=>{
             fetch.post(`${conf.base}/api/menu/listByRank/${rank}`).then((response)=>{
                 let {data} =response;
-                console.log(data);
+                // console.log(data);
                 resolve(data)
             }).catch((err)=>{
                 reject(err);
@@ -40,7 +40,7 @@ let menuQuery={
         return new Promise((resolve,reject)=>{
             fetch.get(`${conf.base}/api/menu/getChildMenu/${uuid}`).then((response)=>{
                 let {data} =response;
-                console.log(data);
+                // console.log(data);
                 resolve(data)
             }).catch((err)=>{
                 reject(err);
@@ -70,7 +70,7 @@ let menuQuery={
     },
     del:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            console.log("del.....")
+            // console.log("del.....")
             fetch.get(`${conf.base}/api/menu/delete/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)

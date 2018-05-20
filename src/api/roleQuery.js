@@ -44,7 +44,7 @@ let roleQuery={
     },
     del:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            console.log("del.....")
+            // console.log("del.....")
             fetch.get(`${conf.base}/api/role/delete/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)

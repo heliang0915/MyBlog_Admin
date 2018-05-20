@@ -4,13 +4,6 @@
     {
       "category":"console",
       "type":"console"
-    },
-    {
-      "category":"log_info",
-      "type": "file",
-      "filename": "./logs/access.log",
-      "maxLogSize": 104857500,
-      "backups": 100
     }
   ],
   "replaceConsole": true,

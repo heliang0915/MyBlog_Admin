@@ -72,7 +72,7 @@ const actions={
         commit(types.FETCH_USER_LIST,pageInfo)
     },
     userSave:async ({commit},{user,fn})=>{
-        console.log("user>>>>"+user);
+        // console.log("user>>>>"+user);
         var message= await userQuery.save(user);
         commit(types.USER_SAVE,message)
         fn==null?function () {}:fn();

@@ -57,7 +57,7 @@ router.route("*").all((req,res,next)=>{
         title: '默认标题',
         url:req.originalUrl
     }
-    console.log("router.route###################"+req.originalUrl);
+    // console.log("router.route###################"+req.originalUrl);
     // context=mergeContext(context,req.originalUrl);
     const s = Date.now()
     renderer.renderToString(context, (err, html) => {

@@ -75,7 +75,7 @@ const actions={
         commit(types.RESET_CHANNEL)
      },
      fetchChannelDel:async ({commit},{uuid,fn})=>{
-         console.log("fetchChannelDel>>>>")
+         // console.log("fetchChannelDel>>>>")
          let message=await  channelQuery.del(uuid);
          commit(types.DELETE_CHANNEL,message);
          fn==null?function () {}:fn();

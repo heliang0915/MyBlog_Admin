@@ -59,7 +59,7 @@ const actions={
         commit(types.FETCH_ROLE_LIST,pageInfo)
     },
     roleSave:async ({commit},{role,fn})=>{
-        console.log("role>>>>"+role);
+        // console.log("role>>>>"+role);
         var message= await roleQuery.save(role);
         commit(types.ROLE_SAVE,message)
         fn==null?function () {}:fn();

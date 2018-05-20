@@ -56,7 +56,7 @@ let userQuery={
     },
     del:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            console.log("del.....")
+            // console.log("del.....")
             fetch.get(`${conf.base}/api/user/delete/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)

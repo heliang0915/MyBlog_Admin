@@ -45,7 +45,7 @@ let commentQuery={
     },
     del:(uuid)=>{
         return new Promise((resolve,reject)=>{
-            console.log("del.....")
+            // console.log("del.....")
             fetch.get(`${conf.base}/api/comment/delete/${uuid}`).then((response)=>{
                 let {data} =response;
                 resolve(data)
