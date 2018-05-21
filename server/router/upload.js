@@ -26,7 +26,9 @@ router.post("/uploadFileByEditor", function (req, res) {
 function upload(req,res,type) {
     console.log("上传文件....");
     //生成multiparty对象，并配置上传目标路径
-    var uploadPath=path.join(__dirname,"/../public/upload/")
+    let uploadPath=env!="development"?path.join(__dirname,"../../dist/server/upload/"):
+        path.join(__dirname,"/../public/upload/");
+    // var uploadPath=path.join(__dirname,"/../public/upload/")
     var form = new multiparty.Form({uploadDir: uploadPath});
     console.log("上传文件....");
     //上传完成后处理
@@ -55,11 +57,11 @@ function upload(req,res,type) {
                             flag:err==null?1:0,
                             data:{
                                 md5:md5.replace('/',''),
-                                url:"http://"+host+":"+port+md5
+                                url:"https://"+host+":"+port+md5
                             }
                         };
                          if(type){
-                             res.send("http://"+host+":"+port+md5);
+                             res.send("https://"+host+":"+port+md5);
                          }else{
                              res.send(info);
                          }
