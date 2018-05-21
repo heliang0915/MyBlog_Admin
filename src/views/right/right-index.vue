@@ -113,13 +113,6 @@
         components: {
             layout
         },
-        watch: {
-            rightMenus: function (newVal, oldVal) {
-                if (newVal) {
-                    this.form.menus = newVal;
-                }
-            }
-        },
         computed: {
             ...mapGetters({
                 menuStruct: 'getMenus',
@@ -128,9 +121,10 @@
             })
     },
         mounted() {
-            // alert(this.roleId);
             this.fetchMenus(-1);
-            this.fetchRightMenuList(this.roleId);
+            this.fetchRightMenuList({roleId:this.roleId,fn: (menus)=>{
+                this.form.menus = menus;
+            }});
         },
         methods: {
             ...mapActions(['fetchMenus', 'fetchRightMenuList', 'rightSave']),

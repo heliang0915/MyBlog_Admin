@@ -68,6 +68,7 @@ let userQuery={
     checkToken(token){
         return new Promise((resolve,reject)=>{
             fetch.post(`${conf.base}/api/checkToken`,{token}).then((response)=>{
+                console.log("checkToken>>>"+response);
                 let {data} =response;
                 resolve(data)
             }).catch((err)=>{

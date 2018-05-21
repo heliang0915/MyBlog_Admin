@@ -2,8 +2,6 @@
  * 基本配置
  */
 var path = require('path');
-var fs = require('fs');
-
 const vueConfig = require('./vue-loader.config');
 var ExtractTextPlugin=require("extract-text-webpack-plugin");
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
@@ -14,7 +12,6 @@ var webpack=require("webpack");
 
 //定义公共路径
 var ROOT_PATH = path.resolve(__dirname);
-// var APP_PATH=path.resolve(ROOT_PATH,'src/app.js');
 var BUILD_PATH=path.resolve(ROOT_PATH,'../dist');
 
 let env=process.env.NODE_ENV||"development";

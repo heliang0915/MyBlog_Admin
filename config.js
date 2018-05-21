@@ -21,15 +21,15 @@ let config={
     production:{
         port:9200,
         host:'http://localhost',
-        base:"http://localhost:9200",
+        base:"https://www.blogadmin.top",
         api:'http://localhost:8080',
         // api:'https://blogapi.top',
         zimg:{
-            host:"www.blogapi.top",
-            port:"4869",
+            host:"www.pimage.top",
+            port:"80",
             uploadPath:"/upload",
-            zImgUpload:"https://www.blogapi.top:4869/upload",
-            zImgDelete:"https://www.blogapi.top:4869/admin"
+            zImgUpload:"https://www.pimage.top/upload",
+            zImgDelete:"https://www.pimage.top/admin"
         }
 }
 };

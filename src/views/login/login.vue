@@ -155,10 +155,12 @@
                     if(valid) {
                         this.fetchLogin({name:userName,pwd:password,fn:(data)=>{
                                 // this.w = 100;
+                                console.dir(data);
                                 if(data==false){
                                     this.$message.error('用户名或密码错误，请稍候重试');
                                 }else{
-                                   window.location.replace("/");
+
+                                   window.location.replace("/channel");
                                 }
                             }});
                     }

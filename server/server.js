@@ -42,7 +42,9 @@ app.use((req,res,next)=>{
     let {token}=req.cookies;
     let url=req.originalUrl;
     if(url.indexOf("login")>-1){
+        console.log("登录不拦...."+url)
         next();
+
     }else{
         console.log("拦截器 服务器端拦截....")
         //校验token
