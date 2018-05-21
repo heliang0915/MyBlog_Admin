@@ -81,9 +81,10 @@ const actions={
         let user=await  userQuery.getSingle(uuid);
         commit(types.FETCH_USER_SINGLE,user)
     },
-    fetchUserInfo:async ({commit},uuid)=>{
+    fetchUserInfo:async ({commit},{uuid,fn})=>{
         let user=await  userQuery.getUserInfo(uuid);
         commit(types.USER_INFO,user)
+        fn==null?function () {}:fn(user);
     },
     resetUserForm:({commit})=>{
         commit(types.RESET_USER)

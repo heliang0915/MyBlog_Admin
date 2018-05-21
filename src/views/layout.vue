@@ -13,7 +13,7 @@
                         &nbsp;
                     </el-col>
                     <el-col :span="3" style="white-space: nowrap">
-                        <el-dropdown>
+                        <el-dropdown @command="handleCommand">
                             <!--<i class="el-icon-setting" style="margin-right: 15px"></i>-->
                             <img class="user-photo" :src="loginUser.pic"></img>
                             <el-dropdown-menu slot="dropdown">
@@ -25,8 +25,8 @@
                                 <el-dropdown-item>
                                     <i class="el-icon-share"></i> <span>我的关注</span>
                                 </el-dropdown-item>
-                                <el-dropdown-item>
-                                    <i class="el-icon-delete"></i> <span>退出</span>
+                                <el-dropdown-item command="exit">
+                                    <i  class="el-icon-delete"></i> <span>退出</span>
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
@@ -38,18 +38,33 @@
             <el-container>
                 <el-aside :width="hastable?'120px':'68px'" height="100%">
                     <el-menu   class="el-menu-vertical-demo"  :collapse="true">
-                        <el-submenu :index="(index+1)+''" :key="'fMenu'+index" v-for="(fMenu,index) in menuStruct">
+                        <el-submenu :index="(index+1)+''" :key="'fMenu'+index" v-if="rightMenus.indexOf(fMenu.uuid)>-1" v-for="(fMenu,index) in menuStruct">
                             <template slot="title">
                                 <i :class="menuIcon[index]"></i>
                                 <span slot="title">{{fMenu.name}}</span>
                             </template>
 
-                            <el-submenu :key="'sMenu'+m" :index="(index+1)+'-'+(m+1)" v-for="(sMenu,m) in fMenu.children">
+                            <el-submenu :key="'sMenu'+m" :index="(index+1)+'-'+(m+1)" v-if="rightMenus.indexOf(sMenu.uuid)>-1" v-for="(sMenu,m) in fMenu.children">
                                 <span slot="title">{{sMenu.name}}</span>
-                                <el-menu-item :index="(index+1)+'-'+(m+1)+'-'+(n+1)" :key="'tMenu'+n" v-for="(tMenu,n) in sMenu.children" @click="goto(tMenu.url)">{{tMenu.name}}</el-menu-item>
+                                <el-menu-item :index="(index+1)+'-'+(m+1)+'-'+(n+1)" :key="'tMenu'+n" v-if="rightMenus.indexOf(tMenu.uuid)>-1" v-for="(tMenu,n) in sMenu.children" @click="goto(tMenu.url)">{{tMenu.name}}</el-menu-item>
                             </el-submenu>
                         </el-submenu>
                     </el-menu>
+
+                    <!--<el-menu   class="el-menu-vertical-demo"  :collapse="true">-->
+                        <!--<el-submenu :index="(index+1)+''" :key="'fMenu'+index" v-for="(fMenu,index) in menuStruct">-->
+                            <!--<template slot="title">-->
+                                <!--<i :class="menuIcon[index]"></i>-->
+                                <!--<span slot="title">{{fMenu.name}}</span>-->
+                            <!--</template>-->
+
+                            <!--<el-submenu :key="'sMenu'+m" :index="(index+1)+'-'+(m+1)"  v-for="(sMenu,m) in fMenu.children">-->
+                                <!--<span slot="title">{{sMenu.name}}</span>-->
+                                <!--<el-menu-item :index="(index+1)+'-'+(m+1)+'-'+(n+1)" :key="'tMenu'+n"  v-for="(tMenu,n) in sMenu.children" @click="goto(tMenu.url)">{{tMenu.name}}</el-menu-item>-->
+                            <!--</el-submenu>-->
+                        <!--</el-submenu>-->
+                    <!--</el-menu>-->
+
                 </el-aside>
                 <el-main v-cloak>
                     <slot></slot>
@@ -140,6 +155,7 @@
 </style>
 <script>
     import {mapActions,mapGetters} from 'vuex';
+    import cookieUtil from '../util/cookie';
 
     export default{
         props:{
@@ -156,7 +172,8 @@
         computed:{
             ...mapGetters({
                 menuStruct:'getMenus',
-                loginUser:'getUserInfo'
+                loginUser:'getUserInfo',
+                rightMenus: 'getRightMenuList'
             })
         },
         filters:{
@@ -172,12 +189,22 @@
         //给服务器端使用的方法
         asyncData(store){
             console.log('asyncData...');
-            // store.dispatch('fetchIndexList')
         },
         methods:{
-            ...mapActions(['fetchMenus','fetchUserInfo']),
+            ...mapActions(['fetchMenus','fetchUserInfo','fetchRightMenuList']),
             goto(url){
                 this.$router.push(url);
+            },
+            handleCommand(command){
+                if(command=="exit"){
+                    this.exit()
+                }
+            },
+            exit(){
+                cookieUtil.delCookie('token');
+                setTimeout(()=>{
+                    window.location.replace("/login");
+                },100)
             }
         },
         mounted(){
@@ -189,7 +216,11 @@
                 main.style.height=(winH-headerH-footerH)+"px"
             }
             this.fetchMenus(-1);
-            this.fetchUserInfo('29cc47047bb9497487ce2de4adae502a');
+            var _this=this;
+            var token=cookieUtil.getCookie('token');
+            this.fetchUserInfo({uuid:token,fn:function(user){
+               _this.fetchRightMenuList({roleId:user.roleId});
+            }});
         }
     }
 </script>

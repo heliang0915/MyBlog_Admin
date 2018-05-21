@@ -29,9 +29,10 @@ const mutations={
 }
 
 const actions={
-    fetchRightMenuList:async ({commit},roleId)=>{
+    fetchRightMenuList:async ({commit},{roleId,fn})=>{
         var menuStructure= await  rightQuery.listByRank(roleId);
         commit(types.FETCH_MENU_RIGHT,menuStructure)
+        fn==null?function () {}:fn(menuStructure);
     },
     rightSave:async ({commit},{roleId,menus,fn})=>{
         var message= await rightQuery.saveRightMenu(roleId,menus);
