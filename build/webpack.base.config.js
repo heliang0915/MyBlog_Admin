@@ -1,7 +1,7 @@
 /**
  * 基本配置
  */
-var path = require('path')
+var path = require('path');
 const vueConfig = require('./vue-loader.config');
 var ExtractTextPlugin=require("extract-text-webpack-plugin");
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
@@ -80,16 +80,13 @@ module.exports = {
     //性能配置
     performance: {
         //此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示  单位字节
-        maxEntrypointSize: 512000, //入口文件最大体积
-        maxAssetSize: 512000,//资源最大体积
+        maxEntrypointSize: 1024000, //入口文件最大体积
+        maxAssetSize: 1024000,//资源最大体积
         hints: isProd ? 'warning' : false
     },
     plugins: isProd?
         [
-            // new webpack.optimize.UglifyJsPlugin({
-            //     compress: { warnings: false }
-            // }),
-
+            //插件可以并行运行UglifyJS插件(生产环境)
             new ParallelUglifyPlugin({
                 cacheDir: '.cache/',
                 uglifyJS:{
@@ -101,9 +98,6 @@ module.exports = {
                     }
                 }
             }),
-            // new HtmlWebpackPlugin({
-            //     compress: { warnings: false }
-            // }),
             new ExtractTextPlugin({
                 filename: 'common.[chunkhash].css'
             })

@@ -28,7 +28,6 @@ const menuSaveComponent=  r => require.ensure([], () => r(require('../views/menu
 
 //权限
 const rightComponent=  r => require.ensure([], () => r(require('../views/right/right-index.vue')), 'rightComponent')
-// const rightEditComponent=  r => require.ensure([], () => r(require('../views/right/right-edit.vue')), 'rightEditComponent')
 
 //评论
 const commentComponent=  r => require.ensure([], () => r(require('../views/comment/comment-list.vue')), 'commentComponent')
@@ -53,38 +52,9 @@ export default {
     menuListComponent,
     menuSaveComponent,
     rightComponent,
-    // rightEditComponent,
     commentComponent,
     replyComponent,
     loginComponent,
     notFoundComponent,
 
 }
-
-//
-// let vueRouterConfig={
-//     //首页路由
-//     indexComponent:"index",
-//     notFoundComponent:"NotFound",
-//     indexEditComponent:"edit",
-//     //频道
-//     channelListComponent:"channel/channel-list",
-//     channelSaveComponent:"channel/channel-save",
-//     //文章
-//     articleListComponent:"article/article-list",
-//     articleSaveComponent:"article/article-save"
-// }
-//
-//
-// let vueRouter={};
-// Object.keys(vueRouterConfig).forEach((key)=>{
-//     makeComponent(key,vueRouterConfig[key]);
-// })
-//
-//
-// //构造组件列表
-// function makeComponent(key,vueFile){
-//     let component=r => require.ensure([], () => r(require(`../views/${vueFile}`)), key)
-//     vueRouter[key]=component;
-// }
-// export default vueRouter

@@ -90,7 +90,7 @@ const actions={
     fetchEditorCfg:async ({commit})=>{
         console.log("fetchEditorCfg>>>>>>>>>>");
         let editorCfg=await editorQuery.getEditorCfg();
-        console.log("editorCfg>>>>>"+editorCfg);
+        // console.log("editorCfg>>>>>"+editorCfg);
         commit(types.EDITOR_CFG,editorCfg)
     }
 

@@ -13,7 +13,7 @@ const state={
 
 const mutations={
     [types.FETCH_MENU_RIGHT](state,payload){
-        console.log("FETCH_MENUS>>>>"+payload);
+        // console.log("FETCH_MENUS>>>>"+payload);
         state.fetching=false;
         state.menuStructure=payload;
     },

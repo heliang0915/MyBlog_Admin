@@ -30,7 +30,7 @@ const mutations={
         state.innerChannels=payload.channels;
     },
     [types.FETCH_MENUS](state,payload){
-        console.log("FETCH_MENUS>>>>"+payload);
+        // console.log("FETCH_MENUS>>>>"+payload);
         state.fetching=false;
         state.menuStruct=payload;
     },
@@ -75,12 +75,12 @@ const actions={
 
     fetchMenus:async ({commit},uuid)=>{
         var menus= await  menuQuery.getChildMenu(uuid);
-        console.log("menus>>>"+menus);
+        // console.log("menus>>>"+menus);
         commit(types.FETCH_MENUS,menus)
     },
 
     menuSave:async ({commit},{menu,fn})=>{
-        console.log("menu>>>>"+menu);
+        // console.log("menu>>>>"+menu);
         var message= await menuQuery.save(menu);
         commit(types.MENU_SAVE,message)
         fn==null?function () {}:fn();
