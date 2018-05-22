@@ -8,8 +8,8 @@ let config={
         port:9100,
         host:'http://localhost',
         base:"http://localhost:9100",
-        // api:'https://blogapi.top',
         api:'http://localhost:8080',
+        // api:'https://www.blogapi.top',
         zimg:{
             host:"www.blogapi.top",
             port:"4869",
@@ -23,8 +23,8 @@ let config={
         host:'http://localhost',
         base:"https://www.blogadmin.top",
         // base:"http://localhost:9200",
-        api:'http://localhost:8080',
-        // api:'https://blogapi.top',
+        // api:'http://localhost:8080',
+        api:'https://blogapi.top',
         zimg:{
             host:"www.pimage.top",
             port:"",

@@ -1,6 +1,6 @@
 <template>
-    <div >
-        <el-container >
+    <div>
+        <el-container>
             <!--头部-->
             <el-header>
                 <el-row>
@@ -148,8 +148,14 @@
         display: inline-block;
         margin-left: 10px;
     }
-    body > .el-container {
+
+    .el-container {
         margin-bottom: 40px;
+        background-color: #FFF !important;
+    }
+    #app{
+        height: 100% !important;
+        background: #FFF;
     }
 
 </style>

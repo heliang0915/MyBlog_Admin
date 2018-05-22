@@ -140,6 +140,7 @@
             let winHeight = document.documentElement.clientHeight;
             // document.body.height=winHeight+"px";
             this.h = winHeight;
+            // console.log(this.$router.replace('/channel'));
         },
         computed:{
             ...mapGetters({
@@ -155,12 +156,13 @@
                     if(valid) {
                         this.fetchLogin({name:userName,pwd:password,fn:(data)=>{
                                 // this.w = 100;
+
                                 console.dir(data);
                                 if(data==false){
                                     this.$message.error('用户名或密码错误，请稍候重试');
                                 }else{
-
-                                   window.location.replace("/channel");
+                                    this.$router.replace('/channel')
+                                   // window.location.replace("/channel");
                                 }
                             }});
                     }

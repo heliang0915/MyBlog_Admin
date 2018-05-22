@@ -76,7 +76,7 @@
                 this.$router.push("/menu");
             },
             onChange(){
-                alert("change");
+                // alert("change");
             },
             onSave(){
                 let {message}=this.state;

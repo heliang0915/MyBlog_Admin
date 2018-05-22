@@ -32,7 +32,8 @@ const mutations={
     [types.FETCH_MENUS](state,payload){
         // console.log("FETCH_MENUS>>>>"+payload);
         state.fetching=false;
-        state.menuStruct=payload;
+        state.menuStruct=payload.menustruct;
+        state.menus=payload.menus;
     },
     [types.MENU_SAVE](state,payload){
         let mes=payload;
