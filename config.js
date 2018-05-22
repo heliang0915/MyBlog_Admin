@@ -22,11 +22,12 @@ let config={
         port:9200,
         host:'http://localhost',
         base:"https://www.blogadmin.top",
+        // base:"http://localhost:9200",
         api:'http://localhost:8080',
         // api:'https://blogapi.top',
         zimg:{
             host:"www.pimage.top",
-            port:"80",
+            port:"",
             uploadPath:"/upload",
             zImgUpload:"https://www.pimage.top/upload",
             zImgDelete:"https://www.pimage.top/admin"
