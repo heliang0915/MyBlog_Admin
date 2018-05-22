@@ -44,7 +44,6 @@ router.post('/login',function(req,res){
         }else{
             console.log(`#############data$$$$$$$$$$$#####${data}`);
             res.cookie('token',data,{domain: '.blogadmin.top',path: '/',httpOnly:false,maxAge:900000});
-            // res.cookie('token',data,{domain: 'localhost',path: '/',httpOnly:false,maxAge:900000});
             res.send(true);
         }
     })
