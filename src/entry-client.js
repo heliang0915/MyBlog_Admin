@@ -19,7 +19,17 @@ router.onReady(() => {
         const activated = matched.filter((c, i) => {
             return diffed || (diffed = (prevMatched[i] !== c))
         })
-        const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _)
+
+        console.log("beforeResolve:::::::to.meta"+JSON.stringify(to.meta));
+        console.log("beforeResolve:::::::from.meta"+JSON.stringify(from.meta));
+        var metas = document.getElementsByTagName("meta");
+        let {title,keywords,description}=to.meta;
+        //SEO
+        document.title=title;
+        metas[0].content=keywords;
+        metas[1].content=description;
+
+        const asyncDataHooks = activated.map(c => c.asyncData==null?null:c.asyncData).filter(_ => _)
         if (!asyncDataHooks.length) {
             return next()
         }

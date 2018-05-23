@@ -227,6 +227,8 @@
             this.fetchUserInfo({uuid:token,fn:function(user){
                _this.fetchRightMenuList({roleId:user.roleId});
             }});
+
+
         }
     }
 </script>

@@ -30,14 +30,11 @@ ZImgCli.prop.XHR =function (url, opt, callback) {
     let options = Object.assign({}, defaultOpt, opt);
     console.log("url>>>"+url);
     var req = request(url, options, (err, res, body) => {
-        console.log(body);
         if(err){
             console.log("出现错误%s", err);
         }
-        console.log("callback>>>>>>>>>>"+callback);
         callback==null?null:callback(err, body);
     })
-    console.log("req>>>#######"+req);
     return req;
 }
 ZImgCli.prop.upload = function (filePath, file, formFiledName, callback) {

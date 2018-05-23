@@ -5,6 +5,16 @@ import axios from 'axios';
 import {env,conf} from '../../config';
 
 
+var instance = axios.create({
+    baseURL: '/',
+    // timeout: 1000,
+    // headers: {'X-Custom-Header': 'foobar'},
+    withCredentials:true
+});
+
+// axios.defaults.withCredentials = true;
+
+
 let replaceReg=(str)=>{
     var reg = /\b(\w)|\s(\w)/g;
     str = str.toLowerCase();
@@ -44,29 +54,27 @@ export default function(url,req,type,para){
     let method="GET";
     if(req){
         method=req.method;
+        //将tooken放入头部
+        console.log("$$$$$$$$$$$$$$$$$$"+JSON.stringify(req.originalUrl));
+        if(req.cookies.token){
+            instance.defaults.headers.common['token'] = req.cookies.token;
+        }
+        // console.log(req.cookies.token);
+        // axios.defaults.headers.common['token'] =req.cookies.token;
+
     }else if(type){
         method=type;
     }
-
-    console.log(para)
     if(method=="POST"&&req){
         params=req.body;
     }else if(method=="POST"&&para){
         params=para;
     }
-
     console.log("代理后的url地址[%s]",url)
     console.log("Method [%s]",method)
     console.log("params [%s]",JSON.stringify(params))
-
-
     return new Promise((resolve,reject)=>{
-        axios[method.toLowerCase()](url,params)
-        // axios({
-        //     method: req.method.toString().toLowerCase(),
-        //     url: url+"?temp="+Math.random(),
-        //     params,
-        // })
+        instance[method.toLowerCase()](url,params)
             .then((data)=>{
 
             var info= {

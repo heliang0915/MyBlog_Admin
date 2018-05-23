@@ -19,6 +19,8 @@ export function createApp() {
     router.beforeEach((to, from, next) => {
         if(isServer==false){
             var token="";
+            console.log("to>>>>>>>>>>>"+JSON.stringify(to));
+
             var cookieAry=document.cookie.split(";");
             if(cookieAry.length){
                 cookieAry.forEach((cookie)=>{
@@ -28,18 +30,13 @@ export function createApp() {
                     }
                 })
             }
-            console.log("to.path........"+to.path);
             if(to.path=="/login"){
                 next();
             }else{
                 checkToken(token).then((data)=>{
-                    // alert("验证结果.........."+data)
-                    // console.log("验证结果.........."+data);
                     if(data==true){
                         next();
                     }else{
-                        // alert("验证未成功");
-                        // console.log("验证未成功");
                         //跳转登录
                         next({
                             name: 'login'
@@ -50,7 +47,6 @@ export function createApp() {
         }else {
             next();
         }
-        // console.log("isServer>>>>"+isServer);
     });
     let app = new Vue({
         router,

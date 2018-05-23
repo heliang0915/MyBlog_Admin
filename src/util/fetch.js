@@ -13,6 +13,8 @@ axios.interceptors.request.use(function (config) {
         NProgress.start();
     }
 
+    console.log(config)
+
     return config;
 }, function (error) {
     return Promise.reject(error);

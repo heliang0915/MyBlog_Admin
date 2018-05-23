@@ -7,23 +7,23 @@ const indexComponent=  r => require.ensure([], () => r(require('../views/index.v
 const indexEditComponent=  r => require.ensure([], () => r(require('../views/edit.vue')), 'indexComponent')
 
 //频道
-const channelListComponent=  r => require.ensure([], () => r(require('../views/channel/channel-list.vue')), 'channelListComponent')
+const channelComponent=  r => require.ensure([], () => r(require('../views/channel/channel-list.vue')), 'channelListComponent')
 const channelSaveComponent=  r => require.ensure([], () => r(require('../views/channel/channel-save.vue')), 'channelSaveComponent')
 
 //文章
-const articleListComponent=  r => require.ensure([], () => r(require('../views/article/article-list.vue')), 'articleListComponent')
+const articleComponent=  r => require.ensure([], () => r(require('../views/article/article-list.vue')), 'articleListComponent')
 const articleSaveComponent=  r => require.ensure([], () => r(require('../views/article/article-save.vue')), 'articleSaveComponent')
 
 //用户
-const userListComponent=  r => require.ensure([], () => r(require('../views/user/user-list.vue')), 'userListComponent')
+const userComponent=  r => require.ensure([], () => r(require('../views/user/user-list.vue')), 'userListComponent')
 const userSaveComponent=  r => require.ensure([], () => r(require('../views/user/user-save.vue')), 'userSaveComponent')
 
 //角色
-const roleListComponent=  r => require.ensure([], () => r(require('../views/role/role-list.vue')), 'roleListComponent')
+const roleComponent=  r => require.ensure([], () => r(require('../views/role/role-list.vue')), 'roleListComponent')
 const roleSaveComponent=  r => require.ensure([], () => r(require('../views/role/role-save.vue')), 'roleSaveComponent')
 
 //菜单
-const menuListComponent=  r => require.ensure([], () => r(require('../views/menu/menu-list.vue')), 'menuListComponent')
+const menuComponent=  r => require.ensure([], () => r(require('../views/menu/menu-list.vue')), 'menuListComponent')
 const menuSaveComponent=  r => require.ensure([], () => r(require('../views/menu/menu-save.vue')), 'menuSaveComponent')
 
 //权限
@@ -41,15 +41,15 @@ const loginComponent=r=>require.ensure([], () => r(require('../views/login/login
 export default {
     indexComponent,
     indexEditComponent,
-    channelListComponent,
+    channelComponent,
     channelSaveComponent,
-    articleListComponent,
+    articleComponent,
     articleSaveComponent,
-    userListComponent,
+    userComponent,
     userSaveComponent,
-    roleListComponent,
+    roleComponent,
     roleSaveComponent,
-    menuListComponent,
+    menuComponent,
     menuSaveComponent,
     rightComponent,
     commentComponent,

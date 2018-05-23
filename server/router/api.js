@@ -1,6 +1,4 @@
 import express from 'express';
-import userQuery from '../query/userQuery';
-// import sessionHelper from '../util/sessionHelper';
 import fetch from '../util/fetch';
 
 let router=express.Router();
