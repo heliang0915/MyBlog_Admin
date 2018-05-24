@@ -19,7 +19,7 @@ export function createApp() {
     router.beforeEach((to, from, next) => {
         if(isServer==false){
             var token="";
-            console.log("to>>>>>>>>>>>"+JSON.stringify(to));
+            // console.log("to>>>>>>>>>>>"+JSON.stringify(to));
 
             var cookieAry=document.cookie.split(";");
             if(cookieAry.length){

@@ -22,6 +22,7 @@ let renderer=createBundleRenderer(serverBundle,{
 //合并上下文
 let mergeContext=(context,path)=>{
     var tmp=path;
+    console.log("path》》》》》》》》"+path)
     if(tmp){
         let seo=SEO[tmp];
         if(seo){

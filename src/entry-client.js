@@ -20,8 +20,8 @@ router.onReady(() => {
             return diffed || (diffed = (prevMatched[i] !== c))
         })
 
-        console.log("beforeResolve:::::::to.meta"+JSON.stringify(to.meta));
-        console.log("beforeResolve:::::::from.meta"+JSON.stringify(from.meta));
+        // console.log("beforeResolve:::::::to.meta"+JSON.stringify(to.meta));
+        // console.log("beforeResolve:::::::from.meta"+JSON.stringify(from.meta));
         var metas = document.getElementsByTagName("meta");
         let {title,keywords,description}=to.meta;
         //SEO
