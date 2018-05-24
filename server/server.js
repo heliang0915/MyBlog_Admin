@@ -49,8 +49,6 @@ app.use((req,res,next)=>{
         console.log("拦截器 服务器端拦截....")
         //校验token
         userQuery.checkToken(token).then(({data},err)=>{
-            console.log("url>>>>>>>>"+url)
-            console.log("token>>>>>>>>"+token)
             let isValidate=data;
             console.dir(isValidate);
             if(isValidate){

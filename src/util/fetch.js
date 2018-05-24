@@ -12,7 +12,7 @@ axios.interceptors.request.use(function (config) {
     if(!isServer){
         NProgress.start();
     }
-
+    // console.log(config)
     return config;
 }, function (error) {
     return Promise.reject(error);

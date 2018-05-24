@@ -19,13 +19,10 @@ export default  context=>{
             })
             const s = Date.now()
             Promise.all(ary).then(() => {
-                // console.log(`请求耗时: ${Date.now() - s}ms`)
-                // console.log(`store.state>>>>${JSON.stringify(store.state)}`)
                 context.state = store.state;
                 resolve(app)
             }).catch((err)=>{
                 reject(err);
-                // console.log(err);
             })
         }, reject)
     })

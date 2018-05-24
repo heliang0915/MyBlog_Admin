@@ -3,15 +3,23 @@
  */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import  seoMap from './seo/seoMap';
+import  routerMap from './routes/routerMap';
+import  SEO from '../server/SEO';
+
 Vue.use(VueRouter);
 export function createRouter() {
     return new VueRouter(getConfig());
 }
 let routes=[];
-Object.keys(seoMap).map((path)=>{
-    let {component,name}=seoMap[path];
-    routes.push({path,component,name});
+Object.keys(routerMap).map((path)=>{
+    let {title,keywords,description}=SEO[path];
+    let meta={
+        title,
+        keywords,
+        description
+    }
+    let {component,name}=routerMap[path];
+    routes.push({path,component,name,meta});
 })
 let getConfig = () => {
     let config = {};

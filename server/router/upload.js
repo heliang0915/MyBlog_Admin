@@ -51,17 +51,22 @@ function upload(req,res,type) {
                     // var zimg=new ZImgCli();
                     console.log("重命名完毕....");
                     zimg.upload(dstPath,inputFile,'userfile',(err,md5)=>{
-                        fs.unlink(dstPath);
+                        fs.unlink(dstPath,()=>{
+
+                        });
+
+                        port=port==""?"":":"+port;
+                        console.log("url>>>>>>>>>>"+"https://"+host+port+md5);
                         let info={
                             message:err==null?"ok":err.message,
                             flag:err==null?1:0,
                             data:{
                                 md5:md5.replace('/',''),
-                                url:"https://"+host+":"+port+md5
+                                url:"https://"+host+port+md5
                             }
                         };
                          if(type){
-                             res.send("https://"+host+":"+port+md5);
+                             res.send("https://"+host+port+md5);
                          }else{
                              res.send(info);
                          }

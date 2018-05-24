@@ -19,7 +19,7 @@ function ZImgCli() {
 }
 
 ZImgCli.prop = ZImgCli.prototype;
-ZImgCli.prop.XHR = function (url, opt, callback) {
+ZImgCli.prop.XHR =function (url, opt, callback) {
     let defaultOpt = {
         method: 'GET',
     };
@@ -30,11 +30,10 @@ ZImgCli.prop.XHR = function (url, opt, callback) {
     let options = Object.assign({}, defaultOpt, opt);
     console.log("url>>>"+url);
     var req = request(url, options, (err, res, body) => {
-        console.log(body);
         if(err){
             console.log("出现错误%s", err);
         }
-        callback(err, body);
+        callback==null?null:callback(err, body);
     })
     return req;
 }
@@ -63,11 +62,6 @@ ZImgCli.prop.upload = function (filePath, file, formFiledName, callback) {
         }else{
             callback(err, 0);
         }
-        // const $ = cheerio.load(html);
-        // let md5 = $('a').attr('href');
-        // if (callback) {
-        //     callback(null, md5);
-        // }
     })
     form.pipe(req);
 }

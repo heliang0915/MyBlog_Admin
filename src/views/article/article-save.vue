@@ -47,9 +47,9 @@
                     </el-form-item>
 
 
-                    <el-form-item prop="title" label="发布人" >
-                        <el-input v-model="info.article.pubUser"></el-input>
-                    </el-form-item>
+                    <!--<el-form-item prop="title" label="发布人" >-->
+                        <!--<el-input v-model="info.article.pubUser"></el-input>-->
+                    <!--</el-form-item>-->
 
                     <el-form-item>
                         <el-button type="primary" @click="onSave">保存</el-button>

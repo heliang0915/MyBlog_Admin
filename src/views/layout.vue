@@ -1,20 +1,15 @@
 <template>
-    <div >
-        <el-container >
+    <div>
+        <el-container>
             <!--头部-->
             <el-header>
                 <el-row>
                     <el-col :span="4">
-                        <!--{{loginUser}}-->
-                        <!--<img class="logo"  alt="">-->
                         <h3>MyBlog</h3>
                     </el-col>
-                    <el-col :span="17">
-                        &nbsp;
-                    </el-col>
+                    <el-col :span="17" style="white-space: nowrap">&nbsp;</el-col>
                     <el-col :span="3" style="white-space: nowrap">
                         <el-dropdown @command="handleCommand">
-                            <!--<i class="el-icon-setting" style="margin-right: 15px"></i>-->
                             <img class="user-photo" :src="loginUser.pic"></img>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item>
@@ -30,7 +25,6 @@
                                 </el-dropdown-item>
                             </el-dropdown-menu>
                         </el-dropdown>
-                        <!--{{JSON.stringify(loginUser)}}-->
                         <span class="user">{{(loginUser.loginType==1||loginUser.loginType==2)?loginUser.nickName: loginUser.name}}</span>
                     </el-col>
                 </el-row>
@@ -50,21 +44,6 @@
                             </el-submenu>
                         </el-submenu>
                     </el-menu>
-
-                    <!--<el-menu   class="el-menu-vertical-demo"  :collapse="true">-->
-                        <!--<el-submenu :index="(index+1)+''" :key="'fMenu'+index" v-for="(fMenu,index) in menuStruct">-->
-                            <!--<template slot="title">-->
-                                <!--<i :class="menuIcon[index]"></i>-->
-                                <!--<span slot="title">{{fMenu.name}}</span>-->
-                            <!--</template>-->
-
-                            <!--<el-submenu :key="'sMenu'+m" :index="(index+1)+'-'+(m+1)"  v-for="(sMenu,m) in fMenu.children">-->
-                                <!--<span slot="title">{{sMenu.name}}</span>-->
-                                <!--<el-menu-item :index="(index+1)+'-'+(m+1)+'-'+(n+1)" :key="'tMenu'+n"  v-for="(tMenu,n) in sMenu.children" @click="goto(tMenu.url)">{{tMenu.name}}</el-menu-item>-->
-                            <!--</el-submenu>-->
-                        <!--</el-submenu>-->
-                    <!--</el-menu>-->
-
                 </el-aside>
                 <el-main v-cloak>
                     <slot></slot>
@@ -148,15 +127,21 @@
         display: inline-block;
         margin-left: 10px;
     }
-    body > .el-container {
+
+    .el-container {
         margin-bottom: 40px;
+        width: 100%;
+        background-color: #FFF !important;
+    }
+    #app{
+        height: 100% !important;
+        background: #FFF;
     }
 
 </style>
 <script>
     import {mapActions,mapGetters} from 'vuex';
     import cookieUtil from '../util/cookie';
-
     export default{
         props:{
           hastable:{
