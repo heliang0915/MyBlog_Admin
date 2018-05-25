@@ -7,14 +7,20 @@ let formatNameFn=(url)=>{
     let name="";
 
     if(nameAry.length>1){
+
         nameAry.forEach((subName,index)=>{
             if(subName){
                 if(index!=1){
                     subName=subName.charAt(0).toUpperCase()+subName.substr(1,subName.length);
                 }
                 name+=subName;
+                if(name.indexOf(":")>-1){
+                    name=name.substr(0,name.indexOf(":"));
+                }
             }
         })
+
+        console.log("name::::::"+name);
     }else{
         name=url;
     }
