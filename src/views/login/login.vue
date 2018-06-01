@@ -161,8 +161,8 @@
                                 if(data==false){
                                     this.$message.error('用户名或密码错误，请稍候重试');
                                 }else{
-                                    // this.$router.replace('/channel')
-                                   window.location.replace("/channel");
+                                    this.$router.replace('/channel')
+                                   // window.location.replace("/channel");
                                 }
                             }});
                     }

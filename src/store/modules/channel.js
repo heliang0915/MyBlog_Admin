@@ -7,10 +7,14 @@ const state={
     fetching:true,
     total:0,
     pageSize:0,
+    ranks:[],
     channel:{
         name:'',
         note:'',
-        uuid:''
+        uuid:'',
+        rank:1,
+        pid:-1
+
     },
     message:{
         flag:0,
@@ -35,13 +39,22 @@ const mutations={
         }
    },
     [types.FETCH_CHANNEL_SINGLE](state,payload){
-        state.channel=payload;
+        state.channel=payload.channel==null?{
+            name:'',
+            note:'',
+            uuid:'',
+            rank:1,
+            pid:-1
+        }:payload.channel;
+        state.ranks=payload.channels;
     },
     [types.RESET_CHANNEL](state,payload){
         state.channel={
             name:'',
             note:'',
-            uuid:''
+            uuid:'',
+            rank:1,
+            pid:-1
         };
     },
     [types.DELETE_CHANNEL](state,payload){
