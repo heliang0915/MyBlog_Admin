@@ -16,12 +16,15 @@
 
                     <el-form-item prop="tag" label="分类">
                         <el-select v-model="info.article.tag" placeholder="请选择">
+
                             <el-option
                                 v-for="item in info.innerChannels"
                                 :key="item.uuid"
                                 :label="item.name"
                                 :value="item.uuid">
                             </el-option>
+
+
                         </el-select>
 
                     </el-form-item>

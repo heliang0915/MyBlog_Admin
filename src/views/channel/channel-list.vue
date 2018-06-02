@@ -24,9 +24,11 @@
             <el-col>
                 <el-table  :data="channelState.channels" @selection-change="selectHandler" >
                     <!--<el-table-column type="selection" width="55" ></el-table-column>-->
-                    <el-table-column prop="uuid" label="uuid" width="300"></el-table-column>
+                    <el-table-column prop="uuid" label="uuid" width="300" ></el-table-column>
                     <el-table-column prop="name" label="栏目名称" ></el-table-column>
                     <el-table-column prop="note" label="栏目描述"></el-table-column>
+                    <el-table-column prop="pName" label="上级栏目"></el-table-column>
+                    <el-table-column prop="rank" label="层级"></el-table-column>
                     <el-table-column prop="order" label="排序号"></el-table-column>
                     <el-table-column label="操作" width="200" @row-click="operation">
                         <template slot-scope="scope">

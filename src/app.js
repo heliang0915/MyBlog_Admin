@@ -7,8 +7,13 @@ import {createRouter} from './router';
 import store from './store';
 import {isServer} from '../config'
 import ElementUI from 'element-ui';
+import TitleMixin from './util/title';
 import 'element-ui/lib/theme-chalk/index.css';
 import {checkToken} from "../src/api/userQuery";
+
+
+
+Vue.mixin(TitleMixin);
 
 export function createApp() {
     Vue.use(ElementUI);
