@@ -22,9 +22,9 @@ let renderer=createBundleRenderer(serverBundle,{
 //合并上下文
 let mergeContext=(context,path)=>{
     var tmp=path;
-    console.log("path》》》》》》》》"+path)
     if(tmp){
         let seo=SEO[tmp];
+        console.log("后端路径：");
         if(seo){
             Object.keys(seo).forEach((key)=>{
                 context[key]=seo[key];
