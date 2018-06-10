@@ -189,6 +189,7 @@
                     editor.onchange = function () {
                         // onchange 事件中更新数据
                         self.info.article.content = editor.$txt.html();
+                        self.info.article.contentTxt = editor.$txt.text();
                     };
                 },200)
             },
@@ -209,6 +210,7 @@
                 let {message}=this.state;
                 // console.log(this.info);
                 let {article}=this.info;
+                console.log("contentTxt:::::"+article.contentTxt);
                 this.$refs['form'].validate((valid)=>{
                     if(valid){
                         this.articleSave({article:article,fn:()=>{
