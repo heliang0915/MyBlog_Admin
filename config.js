@@ -9,7 +9,7 @@ let config={
         host:'http://localhost',
         base:"http://localhost:9100",
         // api:'https://blogapi.top',
-        api:'http://localhost:8080',
+        api:'https://blogapi.top',
         domain:'localhost',
         // api:'https://www.blogapi.top',
         zimg:{

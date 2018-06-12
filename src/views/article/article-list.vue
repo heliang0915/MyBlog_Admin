@@ -37,7 +37,7 @@
                     <!--<el-table-column type="selection" width="55" ></el-table-column>-->
                     <!--<el-table-column prop="uuid" label="uuid" width="300"></el-table-column>-->
                     <el-table-column prop="title" label="文章名称" ></el-table-column>
-                    <el-table-column prop="content" label="文章内容" width="500"></el-table-column>
+                    <el-table-column prop="contentTxt" label="文章内容" width="500" :formatter="formatTxt"  ></el-table-column>
                     <el-table-column prop="channelName" label="分类"></el-table-column>
                     <el-table-column prop="date" label="发布日期"></el-table-column>
                     <el-table-column prop="pubUser" label="发布人"></el-table-column>
@@ -134,6 +134,17 @@
             search(){
                 let {title,tag}=this.key;
                 this.fetchArticleList({cur:1,params:{title,tag}});
+            },
+            formatTxt(row, column){
+                var contextText = row[column.property]==null?'':row[column.property];
+                console.log("###contextText##"+contextText);
+                var len=68;
+                if(contextText&&contextText.length>len){
+                    return contextText.substr(0,len)+'...';
+                }else{
+                    return contextText;
+                }
+
             }
         }
     }
