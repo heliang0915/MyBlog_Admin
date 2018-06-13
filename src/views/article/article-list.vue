@@ -137,7 +137,6 @@
             },
             formatTxt(row, column){
                 var contextText = row[column.property]==null?'':row[column.property];
-                console.log("###contextText##"+contextText);
                 var len=68;
                 if(contextText&&contextText.length>len){
                     return contextText.substr(0,len)+'...';
