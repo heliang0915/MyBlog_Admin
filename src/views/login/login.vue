@@ -12,10 +12,10 @@
                         <el-input v-model="user.password"  type="password" placeholder="请输入您的密码"></el-input>
                     </el-form-item>
                 </div>
-                <div class="rem-area">
-                    <el-checkbox v-model="checked">记住账号</el-checkbox>
-                    <a href="#">忘记密码?</a>
-                </div>
+                <!--<div class="rem-area">-->
+                    <!--<el-checkbox v-model="checked">记住账号</el-checkbox>-->
+                    <!--<a href="#">忘记密码?</a>-->
+                <!--</div>-->
                 <div class="btn-area">
                     <button  @click="login" class="login-btn">登录</button>
                 </div>
