@@ -7,6 +7,9 @@
                     <el-form-item prop="name" label="用户名称" >
                         <el-input v-model="user.name"></el-input>
                     </el-form-item>
+                    <el-form-item prop="name" label="用户昵称" >
+                        <el-input v-model="user.nickName"></el-input>
+                    </el-form-item>
                     <el-form-item prop="pwd" label="密码" >
                         <el-input type="password" v-model="user.pwd"></el-input>
                     </el-form-item>

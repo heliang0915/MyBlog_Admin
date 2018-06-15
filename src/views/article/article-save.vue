@@ -124,8 +124,7 @@
 
         },
         mounted(){
-            // var temp=this.$route.params.uuid;
-            var uuid=this.$route.query.uuid;//temp.substring(0,temp.indexOf('?'));
+            var uuid=this.$route.query.uuid;
             uuid= uuid==null?0:uuid;
             this.fetchArticle(uuid);
             this.fetchEditorCfg();
