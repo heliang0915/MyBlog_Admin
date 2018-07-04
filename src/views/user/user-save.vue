@@ -134,13 +134,17 @@
                             if(flag!=1){
                                 msg=err;
                             }else{
-                                if(!this.user.uuid){
-                                    this.resetUserForm();
-                                }else{
-                                    setTimeout(()=>{
-                                        this.onBack();
-                                    },500)
-                                }
+
+                                setTimeout(()=>{
+                                      this.onBack();
+                                 },500)
+                                // if(!this.user.uuid){
+                                //     this.resetUserForm();
+                                // }else{
+                                //     setTimeout(()=>{
+                                //         this.onBack();
+                                //     },500)
+                                // }
                             }
                             this.$message({
                                 message:msg,

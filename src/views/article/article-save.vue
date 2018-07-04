@@ -218,13 +218,16 @@
                                 if(flag!=1){
                                     msg=err;
                                 }else{
-                                    if(!article.uuid){
-                                        this.resetForm();
-                                    }else{
-                                        setTimeout(()=>{
-                                            this.onBack();
-                                        },500)
-                                    }
+                                    setTimeout(()=>{
+                                        this.onBack();
+                                    },500)
+                                    // if(!article.uuid){
+                                    //     this.resetForm();
+                                    // }else{
+                                    //     setTimeout(()=>{
+                                    //         this.onBack();
+                                    //     },500)
+                                    // }
                                 }
                                 this.$message({
                                     message:msg,

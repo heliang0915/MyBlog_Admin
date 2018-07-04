@@ -90,13 +90,16 @@
                             if(flag!=1){
                                 msg=err;
                             }else{
-                                if(!this.channel.uuid){
-                                    this.resetForm();
-                                }else{
-                                    setTimeout(()=>{
-                                        this.onBack();
-                                    },500)
-                                }
+                                setTimeout(()=>{
+                                    this.onBack();
+                                },500)
+                                // if(!this.channel.uuid){
+                                //     this.resetForm();
+                                // }else{
+                                //     setTimeout(()=>{
+                                //         this.onBack();
+                                //     },500)
+                                // }
                             }
                             this.$message({
                                 message:msg,
