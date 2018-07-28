@@ -24,8 +24,8 @@ let config={
     production:{
         port:9200,
         host:'http://localhost',
-        base:"https://www.blogadmin.top",
-        // base:"http://localhost:9200",
+        // base:"https://www.blogadmin.top",
+        base:"http://localhost:9200",
         api:'http://localhost:8080',
         // api:'https://blogapi.top',
         domain:'.blogadmin.top',

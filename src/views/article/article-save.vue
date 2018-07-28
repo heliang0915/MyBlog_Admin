@@ -124,8 +124,7 @@
 
         },
         mounted(){
-            // var temp=this.$route.params.uuid;
-            var uuid=this.$route.query.uuid;//temp.substring(0,temp.indexOf('?'));
+            var uuid=this.$route.query.uuid;
             uuid= uuid==null?0:uuid;
             this.fetchArticle(uuid);
             this.fetchEditorCfg();
@@ -219,13 +218,16 @@
                                 if(flag!=1){
                                     msg=err;
                                 }else{
-                                    if(!article.uuid){
-                                        this.resetForm();
-                                    }else{
-                                        setTimeout(()=>{
-                                            this.onBack();
-                                        },500)
-                                    }
+                                    setTimeout(()=>{
+                                        this.onBack();
+                                    },500)
+                                    // if(!article.uuid){
+                                    //     this.resetForm();
+                                    // }else{
+                                    //     setTimeout(()=>{
+                                    //         this.onBack();
+                                    //     },500)
+                                    // }
                                 }
                                 this.$message({
                                     message:msg,

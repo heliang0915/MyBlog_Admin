@@ -56,5 +56,4 @@ let articleQuery={
         })
     }
 }
-
 module.exports=articleQuery;
