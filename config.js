@@ -9,7 +9,8 @@ let config={
         host:'http://localhost',
         base:"http://localhost:9100",
         // api:'https://blogapi.top',
-        api:'https://blogapi.top',
+        // api:'https://blogapi.top',
+        api:'http://localhost:8080',
         domain:'localhost',
         // api:'https://www.blogapi.top',
         zimg:{
@@ -25,8 +26,8 @@ let config={
         host:'http://localhost',
         base:"https://www.blogadmin.top",
         // base:"http://localhost:9200",
-        // api:'http://localhost:8080',
-        api:'https://blogapi.top',
+        api:'http://localhost:8080',
+        // api:'https://blogapi.top',
         domain:'.blogadmin.top',
         zimg:{
             host:"www.pimage.top",
